@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ianlopezdiaz.github.io/kaggle-titanic/data/about.html</loc>
+    <lastmod>2026-06-03T03:08:54.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ianlopezdiaz.github.io/kaggle-titanic/2_feature_engineering.html</loc>
+    <lastmod>2026-06-03T03:08:54.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ianlopezdiaz.github.io/kaggle-titanic/index.html</loc>
+    <lastmod>2026-06-03T03:08:54.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ianlopezdiaz.github.io/kaggle-titanic/3_modeling.html</loc>
+    <lastmod>2026-06-03T03:08:54.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ianlopezdiaz.github.io/kaggle-titanic/1_EDA.html</loc>
+    <lastmod>2026-06-03T03:08:54.755Z</lastmod>
+  </url>
+</urlset>
