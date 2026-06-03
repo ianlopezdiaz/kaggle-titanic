@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Kaggle Titanic</title>
+<title>Titanic: End-to-End Classification Case Study</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -244,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Kaggle Titanic</span>
+    <span class="navbar-title">Titanic: End-to-End Classification Case Study</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -255,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Introduction</span></a>
+<span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./1_EDA.html"> 
@@ -293,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#kaggle-titanic" id="toc-kaggle-titanic" class="nav-link active" data-scroll-target="#kaggle-titanic">Kaggle Titanic</a>
+  <li><a href="#titanic-end-to-end-classification-case-study" id="toc-titanic-end-to-end-classification-case-study" class="nav-link active" data-scroll-target="#titanic-end-to-end-classification-case-study">Titanic: End-to-End Classification Case Study</a>
   <ul class="collapse">
   <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What you will learn</a></li>
   <li><a href="#index" id="toc-index" class="nav-link" data-scroll-target="#index">Index</a>
@@ -313,18 +313,19 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="kaggle-titanic" class="level1">
-<h1>Kaggle Titanic</h1>
-<p>This is my attempt at the classic Kaggle competition <a href="https://www.kaggle.com/competitions/titanic">Titanic – Machine Learning from Disaster</a>.</p>
-<p>The goal of this tutorial is to walk through a complete supervised <strong>classification</strong> workflow on a real Kaggle dataset: from exploratory data analysis, through data cleaning and feature engineering, to training and comparing multiple classification models and generating a Kaggle submission.</p>
+<section id="titanic-end-to-end-classification-case-study" class="level1">
+<h1>Titanic: End-to-End Classification Case Study</h1>
+<p>This project demonstrates a complete machine learning workflow using the famous <a href="https://www.kaggle.com/competitions/titanic">Kaggle Titanic dataset</a>. The objective is to predict passenger survival from structured tabular data while showcasing the techniques commonly used in real-world classification problems.</p>
+<p>The goal of this tutorial is to introduce the fundamental concepts of supervised <strong>classification</strong> through a complete end-to-end machine learning workflow on a real Kaggle dataset. The analysis covers exploratory data analysis, data cleaning, feature engineering, model development, model evaluation, and the generation of a Kaggle competition submission.</p>
 <p>For installation, environment setup, and project structure, see the repository’s <a href="README.md">README</a>.</p>
 <hr>
 <section id="what-you-will-learn" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-will-learn">What you will learn</h2>
 <ul>
-<li>How to frame a supervised classification problem using a real Kaggle competition. [web:6]</li>
+<li>How to frame a supervised classification problem using a real Kaggle competition.</li>
 <li>How to explore the dataset, handle missing values, engineer useful features, and prepare data for classification models.</li>
-<li>How to train, evaluate, and compare a range of classifiers (logistic regression, Naive Bayes, KNN, SVM, trees, ensembles, and neural networks) and generate a Kaggle submission.</li>
+<li>How to train, evaluate, and compare a range of classifiers, including logistic regression, Naive Bayes, k-nearest neighbors, support vector machines, decision trees, ensemble methods, and neural networks.</li>
+<li>How to generate predictions and create a valid Kaggle submission.</li>
 </ul>
 <hr>
 </section>
@@ -332,15 +333,15 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="index">Index</h2>
 <section id="exploratory-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="exploratory-data-analysis">1. <strong><a href="./1_EDA.html">Exploratory data analysis</a></strong></h3>
-<p>Understand the problem, inspect the raw data, and build intuition about which features are related to survival on the Titanic.</p>
+<p>Understand the prediction task, explore the dataset, and build intuition about which passenger characteristics are associated with survival on the Titanic.</p>
 </section>
 <section id="data-cleaning-and-feature-engineering" class="level3">
 <h3 class="anchored" data-anchor-id="data-cleaning-and-feature-engineering">2. <strong><a href="./2_feature_engineering.html">Data cleaning and feature engineering</a></strong></h3>
-<p>Handle missing values, encode categorical variables, create new features (e.g., family size, title from name), and prepare a modeling-ready dataset.</p>
+<p>Handle missing values, encode categorical variables, create new features (such as family size and passenger title), and prepare a model-ready dataset.</p>
 </section>
 <section id="modeling-evaluation-and-submission" class="level3">
 <h3 class="anchored" data-anchor-id="modeling-evaluation-and-submission">3. <strong><a href="./3_modeling.html">Modeling, evaluation, and submission</a></strong></h3>
-<p>Train baseline and advanced classifiers, evaluate them with appropriate metrics (accuracy, ROC AUC, confusion matrix), and generate a Kaggle submission file.</p>
+<p>Train baseline and advanced classifiers, evaluate their performance using appropriate metrics (accuracy, ROC-AUC, confusion matrix, and classification reports), compare results across models, and generate a Kaggle submission file.</p>
 
 
 </section>
