@@ -2,13 +2,13 @@ project:
   type: website
 
 website:
-  title: "Kaggle Titanic"
-  description: "This is my attempt at the famous Kaggle competition dataset"
+  title: "Titanic: End-to-End Classification Case Study"
+  description: "A complete machine learning workflow using the Kaggle Titanic dataset."
   site-url: "https://ianlopezdiaz.github.io/kaggle-titanic"
   #favicon: images/favicon.ico # optional - remove if there is none
   navbar:
     left:
-      - text: "Introduction"
+      - text: "Overview"
         href: index.md
       - text: "Exploratory data analysis"
         href: 1_EDA.ipynb
