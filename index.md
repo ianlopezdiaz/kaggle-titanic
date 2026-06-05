@@ -27,7 +27,7 @@ For installation, environment setup, and project structure, see the repository's
 
 ## Index
 
-### 1. **[Exploratory data analysis](1_EDA.ipynb)**
+### 1. **[Exploratory data analysis (EDA)](1_EDA.ipynb)**
 Understand the prediction task, explore the dataset, and build intuition about which passenger characteristics are associated with survival on the Titanic.
 
 ### 2. **[Data cleaning and feature engineering](2_feature_engineering.ipynb)**

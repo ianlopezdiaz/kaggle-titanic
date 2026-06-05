@@ -35,6 +35,13 @@
     "text": "Understand the prediction task, explore the dataset, and build intuition about which passenger characteristics are associated with survival on the Titanic.\n\n\n\nHandle missing values, encode categorical variables, create new features (such as family size and passenger title), and prepare a model-ready dataset.\n\n\n\nTrain baseline and advanced classifiers, evaluate their performance using appropriate metrics (accuracy, ROC-AUC, confusion matrix, and classification reports), compare results across models, and generate a Kaggle submission file."
   },
   {
+    "objectID": "TODO.html",
+    "href": "TODO.html",
+    "title": "TODO",
+    "section": "",
+    "text": "TODO\n\nsomething…"
+  },
+  {
     "objectID": "1_EDA.html",
     "href": "1_EDA.html",
     "title": "Titanic - Machine Learning from Disaster (Kaggle competition)",
