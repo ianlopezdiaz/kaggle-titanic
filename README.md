@@ -1,7 +1,16 @@
-# Titanic Dataset
+# Titanic: End-to-End Classification Case Study
 
-My attempt at the classic Kaggle competition
-[Titanic – Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic).
+This project demonstrates a complete machine learning workflow using the famous
+[Kaggle Titanic dataset](https://www.kaggle.com/competitions/titanic).
+The objective is to predict passenger survival from structured tabular data
+while showcasing the techniques commonly used in real-world classification
+problems.
+
+The goal of this tutorial is to introduce the fundamental concepts of
+supervised **classification** through a complete end-to-end machine learning
+workflow on a real Kaggle dataset. The analysis covers exploratory data
+analysis, data cleaning, feature engineering, model development, model
+evaluation, and the generation of a Kaggle competition submission.
 
 ## About the competition 
 - [Overview](https://www.kaggle.com/competitions/titanic/overview)
