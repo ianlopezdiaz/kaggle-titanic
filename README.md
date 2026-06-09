@@ -11,40 +11,11 @@ supervised **classification** through a complete end-to-end machine learning
 workflow on a real Kaggle dataset. The analysis covers exploratory data
 analysis, data cleaning, feature engineering, model development, model
 evaluation, and the generation of a Kaggle competition submission.
+Check the site [here](https://ianlopezdiaz.github.io/kaggle-titanic).
 
 ## About the competition 
 - [Overview](https://www.kaggle.com/competitions/titanic/overview)
 - [About the data](https://www.kaggle.com/competitions/titanic/data)
-
----
-
-# Project structure
-
-This project is divided into Jupyter notebooks that follow a complete supervised **classification** workflow:
-
-### 1. **[Exploratory data analysis](1_EDA.ipynb)**  
-Understand the problem, inspect the raw data, and build intuition about which features are related to survival on the Titanic.
-
-### 2. **[Data cleaning and feature engineering](2_feature_engineering.ipynb)**  
-Handle missing values, encode categorical variables, create new features (e.g., family size, title from name), and prepare a modeling-ready dataset.
-
-### 3. **[Modeling, evaluation, and submission](3_modeling.ipynb)**  
-Train baseline and advanced classifiers, evaluate them with appropriate metrics (accuracy, ROC AUC, confusion matrix), and generate a Kaggle submission file.
-
-
-## Algorithms I plan to cover
-
-- Logistic Regression
-- Naive Bayes
-- K-Nearest Neighbours (KNN)
-- Support-Vector Machine (SVM)
-- Decision Tree
-- Bagging Decision Tree (Ensemble Learning I)
-- Boosted Decision Tree (Ensemble Learning II)
-- Random Forest (Ensemble Learning III)
-- Voting Classification (Ensemble Learning IV)
-- Linear Discriminant Analysis
-- Neural Networks (Multilayer Perceptron)
 
 ---
 
