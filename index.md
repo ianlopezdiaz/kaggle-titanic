@@ -6,13 +6,20 @@ The objective is to predict passenger survival from structured tabular data
 while showcasing the techniques commonly used in real-world classification
 problems.
 
+Originally introduced as a Kaggle competition, the Titanic dataset has become
+one of the most widely used benchmarks for learning supervised classification.
+Its combination of numerical and categorical features, missing values, and
+opportunities for feature engineering makes it an excellent case study for
+building and evaluating classification models.
+
 The goal of this tutorial is to introduce the fundamental concepts of
 supervised **classification** through a complete end-to-end machine learning
-workflow on a real Kaggle dataset. The analysis covers exploratory data
-analysis, data cleaning, feature engineering, model development, model
-evaluation, and the generation of a Kaggle competition submission.
+workflow on a real dataset. The analysis covers exploratory data analysis,
+data cleaning, feature engineering, model development, model evaluation, and
+the generation of a Kaggle competition submission.
 
-For installation, environment setup, and project structure, see the repository's [README](README.md).
+For installation, environment setup, and project structure, see the repository's
+[README](README.md).
 
 ---
 
