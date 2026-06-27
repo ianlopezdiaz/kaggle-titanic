@@ -293,7 +293,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todo" id="toc-todo" class="nav-link active" data-scroll-target="#todo">TODO</a></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link active" data-scroll-target="#todo">TODO</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#sections" id="toc-sections" class="nav-link" data-scroll-target="#sections">Sections</a></li>
+  </ul></li>
+  <li><a href="#feature-engineering-and-data-preparation" id="toc-feature-engineering-and-data-preparation" class="nav-link" data-scroll-target="#feature-engineering-and-data-preparation">Feature Engineering and Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#objective-1" id="toc-objective-1" class="nav-link" data-scroll-target="#objective-1">Objective</a></li>
+  <li><a href="#sections-1" id="toc-sections-1" class="nav-link" data-scroll-target="#sections-1">Sections</a></li>
+  </ul></li>
+  <li><a href="#model-development-and-evaluation" id="toc-model-development-and-evaluation" class="nav-link" data-scroll-target="#model-development-and-evaluation">Model Development and Evaluation</a>
+  <ul class="collapse">
+  <li><a href="#objective-2" id="toc-objective-2" class="nav-link" data-scroll-target="#objective-2">Objective</a></li>
+  <li><a href="#sections-2" id="toc-sections-2" class="nav-link" data-scroll-target="#sections-2">Sections</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -306,11 +323,90 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="todo" class="level1">
 <h1>TODO</h1>
+<hr>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<section id="objective" class="level3">
+<h3 class="anchored" data-anchor-id="objective">Objective</h3>
+<p>Understand the structure of the dataset and identify factors influencing survival.</p>
+</section>
+<section id="sections" class="level3">
+<h3 class="anchored" data-anchor-id="sections">Sections</h3>
 <ul>
-<li>something…</li>
+<li>Dataset overview</li>
+<li>Missing values analysis</li>
+<li>Target distribution (Survived vs Not Survived)</li>
+<li>Survival by:
+<ul>
+<li>Sex</li>
+<li>Passenger class (Pclass)</li>
+<li>Age</li>
+<li>Embarked location</li>
+</ul></li>
+<li>Feature correlations</li>
+<li>Key insights and hypotheses</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="feature-engineering-and-data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering-and-data-preparation">Feature Engineering and Data Preparation</h2>
+<section id="objective-1" class="level3">
+<h3 class="anchored" data-anchor-id="objective-1">Objective</h3>
+<p>Transform raw data into a model-ready dataset.</p>
+</section>
+<section id="sections-1" class="level3">
+<h3 class="anchored" data-anchor-id="sections-1">Sections</h3>
+<ul>
+<li>Handling missing values</li>
+<li>Encoding categorical variables</li>
+<li>Feature creation:
+<ul>
+<li>FamilySize</li>
+<li>IsAlone</li>
+<li>Title extraction from Name</li>
+</ul></li>
+<li>Feature transformations (scaling / normalization if needed)</li>
+<li>Train/test consistency checks</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="model-development-and-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="model-development-and-evaluation">Model Development and Evaluation</h2>
+<section id="objective-2" class="level3">
+<h3 class="anchored" data-anchor-id="objective-2">Objective</h3>
+<p>Train, compare, and evaluate multiple classification models.</p>
+</section>
+<section id="sections-2" class="level3">
+<h3 class="anchored" data-anchor-id="sections-2">Sections</h3>
+<ul>
+<li>Baseline model (Logistic Regression)</li>
+<li>Additional models:
+<ul>
+<li>Naive Bayes</li>
+<li>KNN</li>
+<li>SVM</li>
+<li>Decision Tree</li>
+<li>Random Forest</li>
+<li>Gradient Boosting (optional)</li>
+</ul></li>
+<li>Cross-validation strategy</li>
+<li>Evaluation metrics:
+<ul>
+<li>Accuracy</li>
+<li>Precision / Recall</li>
+<li>F1-score</li>
+<li>ROC-AUC</li>
+</ul></li>
+<li>Model comparison table</li>
+<li>Final model selection</li>
+<li>Kaggle submission generation</li>
 </ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
