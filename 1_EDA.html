@@ -334,7 +334,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link active" data-scroll-target="#dataset-description">Dataset Description</a></li>
   <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports">Imports</a></li>
   <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data">Loading the Data</a></li>
-  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values">Missing values</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values">Missing values</a>
+  <ul class="collapse">
+  <li><a href="#choosing-an-imputation-strategy-for-age" id="toc-choosing-an-imputation-strategy-for-age" class="nav-link" data-scroll-target="#choosing-an-imputation-strategy-for-age">Choosing an Imputation Strategy for <code>Age</code></a></li>
+  <li><a href="#fill-missing-values-in-embarked-with-the-mode" id="toc-fill-missing-values-in-embarked-with-the-mode" class="nav-link" data-scroll-target="#fill-missing-values-in-embarked-with-the-mode">Fill missing values in <code>Embarked</code> with the mode</a></li>
+  <li><a href="#removing-cabin" id="toc-removing-cabin" class="nav-link" data-scroll-target="#removing-cabin">Removing <code>Cabin</code></a></li>
+  </ul></li>
+  <li><a href="#relationship-between-features-and-survival" id="toc-relationship-between-features-and-survival" class="nav-link" data-scroll-target="#relationship-between-features-and-survival">Relationship Between Features and Survival</a>
+  <ul class="collapse">
+  <li><a href="#sex" id="toc-sex" class="nav-link" data-scroll-target="#sex"><code>Sex</code></a></li>
+  <li><a href="#pclass" id="toc-pclass" class="nav-link" data-scroll-target="#pclass"><code>Pclass</code></a></li>
+  <li><a href="#age" id="toc-age" class="nav-link" data-scroll-target="#age"><code>Age</code></a></li>
+  <li><a href="#fare" id="toc-fare" class="nav-link" data-scroll-target="#fare"><code>Fare</code></a></li>
+  <li><a href="#embarked" id="toc-embarked" class="nav-link" data-scroll-target="#embarked"><code>Embarked</code></a></li>
+  <li><a href="#sibsp" id="toc-sibsp" class="nav-link" data-scroll-target="#sibsp"><code>SibSp</code></a></li>
+  <li><a href="#parch" id="toc-parch" class="nav-link" data-scroll-target="#parch"><code>Parch</code></a></li>
+  <li><a href="#ticket" id="toc-ticket" class="nav-link" data-scroll-target="#ticket"><code>Ticket</code></a></li>
+  <li><a href="#name" id="toc-name" class="nav-link" data-scroll-target="#name"><code>Name</code></a></li>
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings">Summary of Findings</a></li>
+  </ul></li>
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary statistics</a></li>
   <li><a href="#target-variable" id="toc-target-variable" class="nav-link" data-scroll-target="#target-variable">Target variable</a></li>
   <li><a href="#univariate-analysis" id="toc-univariate-analysis" class="nav-link" data-scroll-target="#univariate-analysis">Univariate analysis</a></li>
@@ -450,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="imports" class="level2">
 <h2 class="anchored" data-anchor-id="imports">Imports</h2>
 <p>First, we import the libraries used throughout the analysis.</p>
-<div id="cell-3" class="cell" data-execution_count="15">
+<div id="cell-3" class="cell" data-execution_count="33">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
@@ -467,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="loading-the-data">Loading the Data</h2>
 <p>The dataset is split into a training set and a test set. The training data includes the target variable (<code>Survived</code>), which we aim to predict, while the test set contains only the input features and is used for final Kaggle submission.</p>
 <p>We begin by loading both datasets and performing an initial inspection. This includes checking dataset dimensions, verifying consistency of feature names across train and test sets, and looking for potential issues such as duplicated rows or obvious structural inconsistencies.</p>
-<div id="cell-5" class="cell" data-execution_count="16">
+<div id="cell-5" class="cell" data-execution_count="34">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">"data/test.csv"</span>)</span>
@@ -521,12 +539,12 @@ Target variable (only in test):
 </code></pre>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="17">
+<div id="cell-6" class="cell" data-execution_count="35">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_train.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div>
 
 
@@ -630,12 +648,12 @@ Target variable (only in test):
 </div>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="18">
+<div id="cell-7" class="cell" data-execution_count="36">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_test.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="36">
 <div>
 
 
@@ -733,7 +751,7 @@ Target variable (only in test):
 </div>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="19">
+<div id="cell-8" class="cell" data-execution_count="37">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All features minus the tareget</span></span>
@@ -765,7 +783,7 @@ Target variable (only in test):
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>df_features</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
 
@@ -867,7 +885,7 @@ Target variable (only in test):
 </div>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution_count="20">
+<div id="cell-9" class="cell" data-execution_count="38">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train/Test split</span></span>
@@ -901,7 +919,7 @@ Target variable (only in test):
     13 columns
     </code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
 
@@ -1109,7 +1127,7 @@ Target variable (only in test):
 </div>
 </div>
 <p>In order to start getting a feel for the data we have in our hands, we can use <code>info()</code> and <code>describe()</code> to learn about data types, missing data, and overall statistical metrics such as mean, median, max, min etc.</p>
-<div id="cell-11" class="cell" data-execution_count="21">
+<div id="cell-11" class="cell" data-execution_count="39">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_full.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1137,12 +1155,12 @@ dtypes: bool(1), float64(3), int64(4), object(5)
 memory usage: 124.1+ KB</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="22">
+<div id="cell-12" class="cell" data-execution_count="40">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_full.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="40">
 <div>
 
 
@@ -1250,22 +1268,399 @@ memory usage: 124.1+ KB</code></pre>
 <section id="missing-values" class="level2">
 <h2 class="anchored" data-anchor-id="missing-values">Missing values</h2>
 <p>I always like to visually inspect how much of the data is missing before proceeding with the analysis.</p>
-<div id="cell-14" class="cell" data-execution_count="23">
+<div id="cell-14" class="cell" data-execution_count="41">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df_full.isnull(), cbar <span class="op">=</span> <span class="va">False</span>).set_title(<span class="st">"Missing values heatmap"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    df_full[features].isnull(),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    cbar<span class="op">=</span><span class="va">False</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Missing Values Heatmap"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Features"</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Observations"</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>Text(0.5, 1.0, 'Missing values heatmap')</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="1_EDA_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="1_EDA_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>The heatmap above shows that the dataset contains relatively few missing values. Most features are complete, with only three columns requiring attention:</p>
+<ul>
+<li><code>Cabin</code> has a large proportion of missing values. Because most entries are unavailable, we will exclude this feature from our analysis.</li>
+<li><code>Embarked</code> has only a few missing values, which will be filled with the most frequent port of embarkation.</li>
+<li><code>Age</code> contains a moderate number of missing values. Since age is likely to be an informative predictor of survival, we will impute the missing values rather than discard the affected rows. Before deciding on an imputation strategy, we will examine how the median age varies across different groups of passengers to determine whether a global median or a group-specific median is more appropriate.</li>
+</ul>
+<section id="choosing-an-imputation-strategy-for-age" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-an-imputation-strategy-for-age">Choosing an Imputation Strategy for <code>Age</code></h3>
+<p>A common baseline approach is to replace missing values with the global median age. However, passengers on the Titanic were not a homogeneous population. For example, age distributions may differ between passenger classes or between males and females. If these differences are substantial, using a single global median could introduce unnecessary bias.</p>
+<p>To investigate this, we compare the median age computed:</p>
+<ul>
+<li>Across the entire dataset.</li>
+<li>Grouped by <code>Sex</code>.</li>
+<li>Grouped by <code>Pclass</code>.</li>
+<li>Grouped by both <code>Sex</code> and <code>Pclass</code>.</li>
+</ul>
+<p>This comparison will help us determine whether a more granular imputation strategy is justified.</p>
+<div id="cell-17" class="cell" data-execution_count="42">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Global median</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>global_median <span class="op">=</span> df_full[<span class="st">"Age"</span>].median()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>[<span class="st">"All passengers"</span>],</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>[global_median],</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">"Global median age"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Median age"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_xlabel(<span class="st">""</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Median by Sex</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>median_by_sex <span class="op">=</span> (</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    df_full</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"Sex"</span>)[<span class="st">"Age"</span>]</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    .median()</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>median_by_sex,</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Sex"</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Age"</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">"Median age by `Sex`"</span>)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">"Median age"</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">""</span>)</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Median by Pclass</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>median_by_class <span class="op">=</span> (</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    df_full</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"Pclass"</span>)[<span class="st">"Age"</span>]</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    .median()</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>median_by_class,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Pclass"</span>,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Age"</span>,</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">"Median age by `Pclass`"</span>)</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Median age"</span>)</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">"Passenger class"</span>)</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Median by Sex and Pclass</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>median_by_group <span class="op">=</span> (</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    df_full</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"Pclass"</span>, <span class="st">"Sex"</span>])[<span class="st">"Age"</span>]</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    .median()</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>median_by_group,</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Pclass"</span>,</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Age"</span>,</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"Sex"</span>,</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">"Median age by `Sex` and `Pclass`"</span>)</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_ylabel(<span class="st">"Median age"</span>)</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">"Passenger class"</span>)</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1_EDA_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plots above show that the median age varies considerably across passenger classes and, to a lesser extent, between males and females. While a single global median would provide a simple baseline, it would ignore these differences and assign the same age to passengers from groups with noticeably different age distributions.</p>
+<p>Based on this analysis, we chose to impute missing values in <code>Age</code> using the median age computed within each (<code>Pclass</code>, <code>Sex</code>) group. This approach preserves more of the underlying structure of the data while remaining simple, interpretable, and computationally inexpensive.</p>
+<div id="cell-19" class="cell" data-execution_count="43">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_full[<span class="st">"Age"</span>] <span class="op">=</span> (</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    df_full.groupby([<span class="st">"Pclass"</span>, <span class="st">"Sex"</span>])[<span class="st">"Age"</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           .transform(<span class="kw">lambda</span> s: s.fillna(s.median()))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="fill-missing-values-in-embarked-with-the-mode" class="level3">
+<h3 class="anchored" data-anchor-id="fill-missing-values-in-embarked-with-the-mode">Fill missing values in <code>Embarked</code> with the mode</h3>
+<div id="cell-21" class="cell" data-execution_count="44">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_full,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Embarked"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    order<span class="op">=</span>df_full[<span class="st">"Embarked"</span>].value_counts().index</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of `Embarked`"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Port of embarkation"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of passengers"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1_EDA_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above shows that most passengers embarked at <strong>Southampton (<code>S</code>)</strong>, making it the mode of the <code>Embarked</code> feature by a large margin. Since only a few values are missing, replacing them with the most frequent category is a simple and reasonable imputation strategy that is unlikely to affect the overall distribution of the data.</p>
+<div id="cell-23" class="cell" data-execution_count="45">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill missing values in `Embarked` with the most frequent category</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>embarked_mode <span class="op">=</span> df_full[<span class="st">"Embarked"</span>].mode()[<span class="dv">0</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df_full[<span class="st">"Embarked"</span>] <span class="op">=</span> df_full[<span class="st">"Embarked"</span>].fillna(embarked_mode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="removing-cabin" class="level3">
+<h3 class="anchored" data-anchor-id="removing-cabin">Removing <code>Cabin</code></h3>
+<p>The <code>Cabin</code> feature contains missing values for the majority of passengers. While it is possible to extract potentially useful information from the cabin identifier (such as the deck), the large proportion of missing entries would require more sophisticated imputation or feature engineering techniques.</p>
+<p>For this tutorial, we choose to remove <code>Cabin</code> from the analysis and focus on features that are more complete and straightforward to preprocess. This simplifies the modeling pipeline while retaining the variables that carry most of the predictive information.</p>
+<div id="cell-25" class="cell" data-execution_count="46">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the `Cabin` column from the datasets</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> df <span class="kw">in</span> [df_full, df_train, df_test]:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"Cabin"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        df.drop(columns<span class="op">=</span><span class="st">"Cabin"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the `Cabin` row from the feature description table</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>df_features <span class="op">=</span> df_features[df_features[<span class="st">"Name"</span>] <span class="op">!=</span> <span class="st">"Cabin"</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove `Cabin` from the feature list</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"Cabin"</span> <span class="kw">in</span> features:</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    features.remove(<span class="st">"Cabin"</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>df_features</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Category</th>
+<th data-quarto-table-cell-role="th">Source</th>
+<th data-quarto-table-cell-role="th">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Pclass</td>
+<td>numerical</td>
+<td>original</td>
+<td>Pclass</td>
+<td>Passenger ticket class (`1` = First, `2` = Sec...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Name</td>
+<td>categorical</td>
+<td>original</td>
+<td>Name</td>
+<td>Passenger's full name.</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Sex</td>
+<td>categorical</td>
+<td>original</td>
+<td>Sex</td>
+<td>Passenger's sex (`male` or `female`).</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Age</td>
+<td>numerical</td>
+<td>original</td>
+<td>Age</td>
+<td>Passenger's age in years. Fractional values re...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>SibSp</td>
+<td>numerical</td>
+<td>original</td>
+<td>SibSp</td>
+<td>Number of siblings and spouses aboard the Tita...</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Parch</td>
+<td>numerical</td>
+<td>original</td>
+<td>Parch</td>
+<td>Number of parents and children aboard the Tita...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Ticket</td>
+<td>categorical</td>
+<td>original</td>
+<td>Ticket</td>
+<td>Ticket number.</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Fare</td>
+<td>numerical</td>
+<td>original</td>
+<td>Fare</td>
+<td>Passenger fare.</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Embarked</td>
+<td>categorical</td>
+<td>original</td>
+<td>Embarked</td>
+<td>Port of embarkation (`C` = Cherbourg, `Q` = Qu...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="relationship-between-features-and-survival" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-between-features-and-survival">Relationship Between Features and Survival</h2>
+<p>After handling the missing values, we can begin exploring how each feature relates to the target variable, <code>Survived</code>. The goal of this analysis is not to establish causal relationships, but rather to identify patterns that may help a classification model distinguish between passengers who survived and those who did not.</p>
+<p>Throughout this section, we examine the distribution of survival across the available features and highlight variables that appear to carry predictive information. These observations will also guide the feature engineering and model development stages of the project.</p>
+<section id="sex" class="level3">
+<h3 class="anchored" data-anchor-id="sex"><code>Sex</code></h3>
+<p>One of the first questions we can ask is whether passenger sex was associated with survival. Since <code>Sex</code> is a categorical variable, a simple comparison of survival rates between males and females provides an intuitive way to assess its predictive power.</p>
+<div id="cell-28" class="cell" data-execution_count="47">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>survival_by_sex <span class="op">=</span> (</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    df_train</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"Sex"</span>)[<span class="st">"Survived"</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.barplot(</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>survival_by_sex,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Sex"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Survived"</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> ax.patches:</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    ax.annotate(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>p<span class="sc">.</span>get_height()<span class="sc">:.1%}</span><span class="ss">"</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        (p.get_x() <span class="op">+</span> p.get_width() <span class="op">/</span> <span class="dv">2</span>, p.get_height()),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        va<span class="op">=</span><span class="st">"bottom"</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Survival rate by sex"</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Sex"</span>)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Survival rate"</span>)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1_EDA_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above shows a striking difference in survival rates between male and female passengers. While only a small fraction of males survived, the majority of females did.</p>
+<p>This pattern reflects the historical evacuation policy commonly described as <em>“women and children first”</em>, which prioritized women during the lifeboat evacuation. From a machine learning perspective, the result indicates that <code>Sex</code> is likely to be one of the most informative predictors of passenger survival and should therefore be retained as an important feature in our classification models.</p>
+</section>
+<section id="pclass" class="level3">
+<h3 class="anchored" data-anchor-id="pclass"><code>Pclass</code></h3>
+<p>Passenger class is often considered a proxy for socioeconomic status and may have influenced passengers’ access to lifeboats and other resources during the evacuation. In this section, we examine how survival rates vary across the three passenger classes to determine whether <code>Pclass</code> is an informative predictor.</p>
+</section>
+<section id="age" class="level3">
+<h3 class="anchored" data-anchor-id="age"><code>Age</code></h3>
+<p>Age may have played an important role in survival, particularly given the historical accounts of evacuation procedures prioritizing women and children. Here, we investigate the relationship between passenger age and survival to determine whether age provides useful predictive information.</p>
+</section>
+<section id="fare" class="level3">
+<h3 class="anchored" data-anchor-id="fare"><code>Fare</code></h3>
+<p>The <code>Fare</code> feature represents the price paid for a passenger’s ticket. Since ticket prices were generally associated with passenger class and cabin location, they may also be indirectly related to survival. We explore this relationship by comparing the fare distributions of survivors and non-survivors.</p>
+</section>
+<section id="embarked" class="level3">
+<h3 class="anchored" data-anchor-id="embarked"><code>Embarked</code></h3>
+<p>Passengers boarded the Titanic at one of three ports: Cherbourg (<code>C</code>), Queenstown (<code>Q</code>), or Southampton (<code>S</code>). Differences in passenger demographics across these ports may have influenced survival rates. We therefore compare the proportion of survivors for each port of embarkation.</p>
+</section>
+<section id="sibsp" class="level3">
+<h3 class="anchored" data-anchor-id="sibsp"><code>SibSp</code></h3>
+<p>The <code>SibSp</code> feature records the number of siblings and spouses traveling with each passenger. Traveling with family members may have influenced evacuation decisions and survival outcomes. In this section, we investigate whether the number of accompanying siblings or spouses is associated with survival.</p>
+</section>
+<section id="parch" class="level3">
+<h3 class="anchored" data-anchor-id="parch"><code>Parch</code></h3>
+<p>The <code>Parch</code> feature indicates the number of parents and children traveling with each passenger. Similar to <code>SibSp</code>, it provides information about family relationships aboard the Titanic. We examine whether traveling with parents or children is associated with differences in survival rates.</p>
+</section>
+<section id="ticket" class="level3">
+<h3 class="anchored" data-anchor-id="ticket"><code>Ticket</code></h3>
+<p>The <code>Ticket</code> feature contains the passenger’s ticket number. Although it appears to be an identifier, ticket numbers may encode information about booking groups or travel arrangements. We perform a brief inspection to determine whether this feature contains useful predictive information in its raw form.</p>
+</section>
+<section id="name" class="level3">
+<h3 class="anchored" data-anchor-id="name"><code>Name</code></h3>
+<p>At first glance, the <code>Name</code> feature appears to be a simple identifier. However, passenger names contain additional information, such as honorific titles (<code>Mr.</code>, <code>Mrs.</code>, <code>Miss</code>, <code>Master</code>, etc.), which may capture demographic characteristics related to survival. We briefly examine this feature before exploring it further during feature engineering.</p>
+</section>
+<section id="summary-of-findings" class="level3">
+<h3 class="anchored" data-anchor-id="summary-of-findings">Summary of Findings</h3>
+<p>The exploratory analysis reveals several features that appear to be strongly associated with passenger survival.</p>
+<ul>
+<li><code>Sex</code> is the strongest individual predictor, with female passengers exhibiting substantially higher survival rates.</li>
+<li><code>Pclass</code> is also highly informative, with first-class passengers surviving more frequently than those in second and third class.</li>
+<li><code>Age</code> shows a weaker but noticeable relationship with survival, particularly for young children.</li>
+<li><code>Fare</code> is positively associated with survival, although this relationship is partly explained by passenger class.</li>
+<li><code>Embarked</code> exhibits modest differences in survival rates across ports of embarkation.</li>
+<li><code>SibSp</code> and <code>Parch</code> suggest that family structure may influence survival, motivating the creation of derived features such as <code>FamilySize</code> and <code>IsAlone</code>.</li>
+</ul>
+<p>These observations provide useful intuition about the dataset and motivate many of the feature engineering choices made in the next notebook.</p>
+</section>
 </section>
 <section id="summary-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h2>
