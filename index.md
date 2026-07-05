@@ -35,10 +35,10 @@ For installation, environment setup, and project structure, see the repository's
 ## Index
 
 ### 1. **[Exploratory data analysis (EDA)](01_EDA.ipynb)**
-Understand the prediction task, explore the dataset, and build intuition about which passenger characteristics are associated with survival on the Titanic.
+Understand the prediction task, explore the dataset, data types, missing values, and build intuition about which passenger characteristics are associated with survival on the Titanic.
 
-### 2. **[Data cleaning and feature engineering](02_feature_engineering.ipynb)**
-Handle missing values, encode categorical variables, create new features (such as family size and passenger title), and prepare a model-ready dataset.
+### 2. **[Feature engineering](02_feature_engineering.ipynb)**
+Encode categorical variables, create new features (such as family size and passenger title), and prepare a model-ready dataset.
 
 ### 3. **[Modeling, evaluation, and submission](03_modeling.ipynb)**
 Train baseline and advanced classifiers, evaluate their performance using appropriate metrics (accuracy, ROC-AUC, confusion matrix, and classification reports), compare results across models, and generate a Kaggle submission file.
