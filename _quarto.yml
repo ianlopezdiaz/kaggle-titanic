@@ -17,8 +17,12 @@ website:
       - text: "Modeling"
         href: 03_modeling.ipynb
     right:
-      - icon: github
+      - text: Portfolio
         href: https://ianlopezdiaz.github.io/portfolio
+      - icon: github
+        href: https://github.com/ianlopezdiaz/kaggle-titanic
+
+
   page-footer:
     left: "© 2026 ianlopezdiaz"
     right: "Built with [Quarto](https://quarto.org/)"
