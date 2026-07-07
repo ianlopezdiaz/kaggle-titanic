@@ -1,79 +1,122 @@
 # Titanic: End-to-End Classification Case Study
 
-This project demonstrates a complete machine learning workflow using the famous
-[Kaggle Titanic dataset](https://www.kaggle.com/competitions/titanic).
-The objective is to predict passenger survival from structured tabular data
-while showcasing the techniques commonly used in real-world classification
-problems.
+This repository presents a complete end-to-end machine learning workflow using the **Kaggle Titanic: Machine Learning from Disaster** dataset.
 
-The goal of this tutorial is to introduce the fundamental concepts of
-supervised **classification** through a complete end-to-end machine learning
-workflow on a real Kaggle dataset. The analysis covers exploratory data
-analysis, data cleaning, feature engineering, model development, model
-evaluation, and the generation of a Kaggle competition submission.
-Check the site [here](https://ianlopezdiaz.github.io/kaggle-titanic).
+The project is designed as both a portfolio piece and an educational resource, demonstrating the typical stages of a supervised classification project—from exploratory data analysis to feature engineering, model development, evaluation, and Kaggle submission generation.
 
-## About the competition 
-- [Overview](https://www.kaggle.com/competitions/titanic/overview)
-- [About the data](https://www.kaggle.com/competitions/titanic/data)
+The accompanying Quarto website documents every step of the workflow and is available at:
+
+**[https://ianlopezdiaz.github.io/kaggle-titanic](https://ianlopezdiaz.github.io/kaggle-titanic)**
 
 ---
 
-# Getting started to do this locally
+## Project Overview
 
-### Install requirements:
+The objective is to predict whether a passenger survived the sinking of the RMS Titanic using demographic, socioeconomic, and travel-related information.
+
+Rather than focusing exclusively on competition performance, this project emphasizes good machine learning practices, reproducible workflows, and careful feature engineering.
+
+The complete pipeline includes:
+
+* Exploratory Data Analysis (EDA)
+* Data cleaning and preprocessing
+* Feature engineering
+* Feature transformations
+* Feature encoding
+* Model training
+* Model evaluation
+* Kaggle submission generation
+
+---
+
+## Dataset
+
+The project uses the **Titanic: Machine Learning from Disaster** competition dataset from Kaggle.
+
+* Competition overview: https://www.kaggle.com/competitions/titanic
+* Dataset: https://www.kaggle.com/competitions/titanic/data
+
+---
+
+## Repository Structure
+
+```text
+kaggle-titanic/
+│
+├── README.md
+├── index.qmd
+├── _quarto.yml
+├── environment.yml
+├── LICENSE
+│
+├── notebooks/
+│   ├── 01_exploratory_data_analysis.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   └── 03_modeling_and_evaluation.ipynb
+│
+├── data/
+│   ├── raw/
+│   │   ├── about.md
+│   │   ├── train.csv
+│   │   ├── test.csv
+│   │   └── gender_submission.csv
+│   │
+│   └── processed/
+│       ├── 01_data.parquet
+│       ├── 01_features.parquet
+│       ├── 02_data.parquet
+│       ├── 02_features.parquet
+|       └── submission.csv
+│
+└── _site/
+```
+
+---
+
+## Running the Project
+
+### Install the dependencies
+
+Using `pip`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-or, if you prefer
-
-### Clone my environment:
+or create the Conda environment:
 
 ```bash
 conda env create -f environment.yml
 ```
 
-You can change `name` to anything you like in the `environment.yml` file
-if you already have an Anaconda/Miniconda environment with this name or
-you simply want to use a different name for whatever reason.
+If desired, you may change the environment name inside `environment.yml` before creating it.
 
 ---
 
-# Build the site with Quarto
+## Building the Documentation
 
-### 1. Install [Quarto](https://quarto.org/) (if you haven't already done it)
-```bash
-pip install quarto-cli
-```
+This repository uses **Quarto** to generate the project website.
 
-After you have all requirements or environment up and running
-and can modify the project anyway you feel like and 
-to preview the site just do
+Preview the website locally:
 
 ```bash
 quarto preview
 ```
 
-After you are finished just
+Render the complete site:
 
-### 2. Render the site locally
 ```bash
 quarto render
 ```
 
-### 3. Commit/Push
-```bash
-git add .
-git commit -m "some message"
-git push origin
-```
+Publish to GitHub Pages:
 
-### 4. Publish the site
 ```bash
 quarto publish gh-pages
 ```
 
 ---
 
+## License
+
+This project is distributed under the terms of the MIT License. See the `LICENSE` file for details.

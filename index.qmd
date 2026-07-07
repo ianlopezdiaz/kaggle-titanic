@@ -1,0 +1,102 @@
+---
+title: "Titanic: End-to-End Classification Case Study"
+description: "End-to-end machine learning workflow for predicting passenger survival using structured tabular data."
+---
+
+## Overview
+
+This project develops an end-to-end machine learning workflow for predicting passenger survival using the Kaggle Titanic dataset.
+
+Rather than focusing solely on leaderboard performance, the project emphasizes the complete classification modeling process, including exploratory data analysis, feature engineering, feature transformations, model comparison, and rigorous evaluation through cross-validation.
+
+The final objective is to build a predictive model capable of estimating the probability of survival for passengers in the test set and generating a valid Kaggle competition submission.
+
+---
+
+## Problem Statement
+
+Given a set of passenger characteristics, the system must:
+
+1. Explore and understand the dataset.
+2. Prepare and engineer meaningful predictive features.
+3. Train and compare multiple classification models.
+4. Predict passenger survival for unseen observations.
+
+---
+
+## Methodology
+
+The project follows a structured machine learning pipeline:
+
+* Exploratory Data Analysis (EDA)
+* Data cleaning and missing value treatment
+* Feature engineering
+* Feature transformations
+* Feature encoding
+* Baseline models
+* Logistic Regression
+* Decision Tree
+* Random Forest
+* Gradient Boosting
+* Cross-validation and model comparison
+* Final model training and Kaggle submission
+
+---
+
+## Dataset
+
+The project uses the **Titanic: Machine Learning from Disaster** dataset from Kaggle.
+
+The dataset contains demographic, socioeconomic, and travel information for passengers aboard the RMS Titanic, including:
+
+* Passenger demographics
+* Ticket and fare information
+* Passenger class
+* Family relationships
+* Port of embarkation
+* Survival status (training set)
+
+The objective is to predict the survival of passengers in the test set.
+
+---
+
+## Project Structure
+
+The repository is organized as follows:
+
+```text
+kaggle-titanic/
+│
+├── README.md
+├── index.qmd
+├── _quarto.yml
+├── environment.yml
+├── LICENSE
+│
+├── notebooks/
+│   ├── 01_exploratory_data_analysis.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   └── 03_modeling_and_evaluation.ipynb
+│
+├── data/
+│   ├── raw/
+│   │   ├── about.md
+│   │   ├── train.csv
+│   │   ├── test.csv
+│   │   └── gender_submission.csv
+│   │
+│   └── processed/
+│       ├── 01_data.parquet
+│       ├── 01_features.parquet
+│       ├── 02_data.parquet
+│       ├── 02_features.parquet
+|       └── submission.csv
+│
+└── _site/
+```
+
+---
+
+## Status
+
+This project documents a complete supervised classification workflow, from raw data exploration to model evaluation and Kaggle submission generation.

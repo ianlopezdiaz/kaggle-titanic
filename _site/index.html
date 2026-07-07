@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="End-to-end machine learning workflow for predicting passenger survival using structured tabular data.">
 
 <title>Titanic: End-to-End Classification Case Study</title>
 <style>
@@ -255,20 +256,27 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Overview</span></a>
+<span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./01_EDA.html"> 
-<span class="menu-text">EDA</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-notebooks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Notebooks</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-notebooks">    
+        <li>
+    <a class="dropdown-item" href="./notebooks/01_exploratory_data_analysis.html">
+ <span class="dropdown-text">01 - Exploratory Data Analysis (EDA)</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./02_feature_engineering.html"> 
-<span class="menu-text">Feature engineering</span></a>
+        <li>
+    <a class="dropdown-item" href="./notebooks/02_feature_engineering.html">
+ <span class="dropdown-text">02 - Feature engineering</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./03_modeling.html"> 
-<span class="menu-text">Modeling</span></a>
+        <li>
+    <a class="dropdown-item" href="./notebooks/03_modeling_and_evaluation.html">
+ <span class="dropdown-text">03 - Modeling and Evaluation</span></a>
   </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -297,60 +305,133 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#titanic-end-to-end-classification-case-study" id="toc-titanic-end-to-end-classification-case-study" class="nav-link active" data-scroll-target="#titanic-end-to-end-classification-case-study">Titanic: End-to-End Classification Case Study</a>
-  <ul class="collapse">
-  <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What you will learn</a></li>
-  <li><a href="#index" id="toc-index" class="nav-link" data-scroll-target="#index">Index</a>
-  <ul class="collapse">
-  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">1. <strong>Exploratory data analysis (EDA)</strong></a></li>
-  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering">2. <strong>Feature engineering</strong></a></li>
-  <li><a href="#modeling-evaluation-and-submission" id="toc-modeling-evaluation-and-submission" class="nav-link" data-scroll-target="#modeling-evaluation-and-submission">3. <strong>Modeling, evaluation, and submission</strong></a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project Structure</a></li>
+  <li><a href="#status" id="toc-status" class="nav-link" data-scroll-target="#status">Status</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Titanic: End-to-End Classification Case Study</h1>
+</div>
+
+<div>
+  <div class="description">
+    End-to-end machine learning workflow for predicting passenger survival using structured tabular data.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
-<section id="titanic-end-to-end-classification-case-study" class="level1">
-<h1>Titanic: End-to-End Classification Case Study</h1>
-<p>This project demonstrates a complete machine learning workflow using the famous <a href="https://www.kaggle.com/competitions/titanic">Kaggle Titanic dataset</a>. The objective is to predict passenger survival from structured tabular data while showcasing the techniques commonly used in real-world classification problems.</p>
-<p>Originally introduced as a Kaggle competition, the Titanic dataset has become one of the most widely used benchmarks for learning supervised classification. Its combination of numerical and categorical features, missing values, and opportunities for feature engineering makes it an excellent case study for building and evaluating classification models.</p>
-<p>The goal of this tutorial is to introduce the fundamental concepts of supervised <strong>classification</strong> through a complete end-to-end machine learning workflow on a real dataset. The analysis covers exploratory data analysis, data cleaning, feature engineering, model development, model evaluation, and the generation of a Kaggle competition submission.</p>
-<p>For installation, environment setup, and project structure, see the repository’s <a href="README.md">README</a>.</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This project develops an end-to-end machine learning workflow for predicting passenger survival using the Kaggle Titanic dataset.</p>
+<p>Rather than focusing solely on leaderboard performance, the project emphasizes the complete classification modeling process, including exploratory data analysis, feature engineering, feature transformations, model comparison, and rigorous evaluation through cross-validation.</p>
+<p>The final objective is to build a predictive model capable of estimating the probability of survival for passengers in the test set and generating a valid Kaggle competition submission.</p>
 <hr>
-<section id="what-you-will-learn" class="level2">
-<h2 class="anchored" data-anchor-id="what-you-will-learn">What you will learn</h2>
+</section>
+<section id="problem-statement" class="level2">
+<h2 class="anchored" data-anchor-id="problem-statement">Problem Statement</h2>
+<p>Given a set of passenger characteristics, the system must:</p>
+<ol type="1">
+<li>Explore and understand the dataset.</li>
+<li>Prepare and engineer meaningful predictive features.</li>
+<li>Train and compare multiple classification models.</li>
+<li>Predict passenger survival for unseen observations.</li>
+</ol>
+<hr>
+</section>
+<section id="methodology" class="level2">
+<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
+<p>The project follows a structured machine learning pipeline:</p>
 <ul>
-<li>How to frame a supervised classification problem using a real Kaggle competition.</li>
-<li>How to explore the dataset, handle missing values, engineer useful features, and prepare data for classification models.</li>
-<li>How to train, evaluate, and compare a range of classifiers, including logistic regression, Naive Bayes, k-nearest neighbors, support vector machines, decision trees, ensemble methods, and neural networks.</li>
-<li>How to generate predictions and create a valid Kaggle submission.</li>
+<li>Exploratory Data Analysis (EDA)</li>
+<li>Data cleaning and missing value treatment</li>
+<li>Feature engineering</li>
+<li>Feature transformations</li>
+<li>Feature encoding</li>
+<li>Baseline models</li>
+<li>Logistic Regression</li>
+<li>Decision Tree</li>
+<li>Random Forest</li>
+<li>Gradient Boosting</li>
+<li>Cross-validation and model comparison</li>
+<li>Final model training and Kaggle submission</li>
 </ul>
 <hr>
 </section>
-<section id="index" class="level2">
-<h2 class="anchored" data-anchor-id="index">Index</h2>
-<section id="exploratory-data-analysis-eda" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-data-analysis-eda">1. <strong><a href="./01_EDA.html">Exploratory data analysis (EDA)</a></strong></h3>
-<p>Understand the prediction task, explore the dataset, data types, missing values, and build intuition about which passenger characteristics are associated with survival on the Titanic.</p>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<p>The project uses the <strong>Titanic: Machine Learning from Disaster</strong> dataset from Kaggle.</p>
+<p>The dataset contains demographic, socioeconomic, and travel information for passengers aboard the RMS Titanic, including:</p>
+<ul>
+<li>Passenger demographics</li>
+<li>Ticket and fare information</li>
+<li>Passenger class</li>
+<li>Family relationships</li>
+<li>Port of embarkation</li>
+<li>Survival status (training set)</li>
+</ul>
+<p>The objective is to predict the survival of passengers in the test set.</p>
+<hr>
 </section>
-<section id="feature-engineering" class="level3">
-<h3 class="anchored" data-anchor-id="feature-engineering">2. <strong><a href="./02_feature_engineering.html">Feature engineering</a></strong></h3>
-<p>Encode categorical variables, create new features (such as family size and passenger title), and prepare a model-ready dataset.</p>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<p>The repository is organized as follows:</p>
+<pre class="text"><code>kaggle-titanic/
+│
+├── README.md
+├── index.qmd
+├── _quarto.yml
+├── environment.yml
+├── LICENSE
+│
+├── notebooks/
+│   ├── 01_exploratory_data_analysis.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   └── 03_modeling_and_evaluation.ipynb
+│
+├── data/
+│   ├── raw/
+│   │   ├── about.md
+│   │   ├── train.csv
+│   │   ├── test.csv
+│   │   └── gender_submission.csv
+│   │
+│   └── processed/
+│       ├── 01_data.parquet
+│       ├── 01_features.parquet
+│       ├── 02_data.parquet
+│       ├── 02_features.parquet
+|       └── submission.csv
+│
+└── _site/</code></pre>
+<hr>
 </section>
-<section id="modeling-evaluation-and-submission" class="level3">
-<h3 class="anchored" data-anchor-id="modeling-evaluation-and-submission">3. <strong><a href="./03_modeling.html">Modeling, evaluation, and submission</a></strong></h3>
-<p>Train baseline and advanced classifiers, evaluate their performance using appropriate metrics (accuracy, ROC-AUC, confusion matrix, and classification reports), compare results across models, and generate a Kaggle submission file.</p>
+<section id="status" class="level2">
+<h2 class="anchored" data-anchor-id="status">Status</h2>
+<p>This project documents a complete supervised classification workflow, from raw data exploration to model evaluation and Kaggle submission generation.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

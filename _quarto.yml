@@ -8,14 +8,16 @@ website:
   #favicon: images/favicon.ico # optional - remove if there is none
   navbar:
     left:
-      - text: "Overview"
-        href: index.md
-      - text: "EDA"
-        href: 01_EDA.ipynb
-      - text: "Feature engineering"
-        href: 02_feature_engineering.ipynb
-      - text: "Modeling"
-        href: 03_modeling.ipynb
+      - text: "Home"
+        href: index.qmd
+      - text: "Notebooks"
+        menu:
+          - href: notebooks/01_exploratory_data_analysis.ipynb
+            text: "01 - Exploratory Data Analysis (EDA)"
+          - href: notebooks/02_feature_engineering.ipynb
+            text: "02 - Feature engineering"
+          - href: notebooks/03_modeling_and_evaluation.ipynb
+            text: "03 - Modeling and Evaluation"
     right:
       - text: Portfolio
         href: https://ianlopezdiaz.github.io/portfolio
