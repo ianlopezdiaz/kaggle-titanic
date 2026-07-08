@@ -43,32 +43,31 @@ The project uses the **Titanic: Machine Learning from Disaster** competition dat
 ```text
 kaggle-titanic/
 │
-├── README.md
-├── index.qmd
-├── _quarto.yml
-├── environment.yml
-├── LICENSE
+├── README.md                                  # Project overview and usage instructions.
+├── index.qmd                                  # Landing page for the Quarto website.
+├── _quarto.yml                                # Quarto website configuration.
+├── environment.yml                            # Conda environment specification.
+├── LICENSE                                    # Project license.
 │
 ├── notebooks/
-│   ├── 01_exploratory_data_analysis.ipynb
-│   ├── 02_feature_engineering.ipynb
-│   └── 03_modeling_and_evaluation.ipynb
+│   ├── 01_exploratory_data_analysis.ipynb      # Exploratory analysis of the Titanic dataset.
+│   ├── 02_feature_engineering.ipynb            # Feature engineering, transformations, and encoding.
+│   └── 03_modeling_and_evaluation.ipynb        # Model training, evaluation, and Kaggle submission.
 │
 ├── data/
 │   ├── raw/
-│   │   ├── about.md
-│   │   ├── train.csv
-│   │   ├── test.csv
-│   │   └── gender_submission.csv
+│   │   ├── train.csv                          # Kaggle training dataset.
+│   │   ├── test.csv                           # Kaggle test dataset.
+│   │   └── gender_submission.csv              # Example Kaggle submission file.
 │   │
 │   └── processed/
-│       ├── 01_data.parquet
-│       ├── 01_features.parquet
-│       ├── 02_data.parquet
-│       ├── 02_features.parquet
-|       └── submission.csv
+│       ├── 01_data.parquet                    # Dataset produced after exploratory data analysis.
+│       ├── 01_features.parquet                # Feature registry after exploratory data analysis.
+│       ├── 02_data.parquet                    # Dataset after feature engineering.
+│       ├── 02_features.parquet                # Updated feature registry after feature engineering.
+│       └── submission.csv                     # Final predictions submitted to Kaggle.
 │
-└── _site/
+└── _site/                                     # Generated Quarto website.
 ```
 
 ---
