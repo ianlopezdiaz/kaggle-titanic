@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Feature Engineering – Titanic: End-to-End Classification Case Study</title>
+<title>Feature engineering – Titanic: End-to-End Classification Case Study</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -342,9 +342,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#imports-and-data-loading" id="toc-imports-and-data-loading" class="nav-link active" data-scroll-target="#imports-and-data-loading">Imports and Data Loading</a></li>
-  <li><a href="#feature-registry" id="toc-feature-registry" class="nav-link" data-scroll-target="#feature-registry">Feature Registry</a></li>
-  <li><a href="#engineered-features" id="toc-engineered-features" class="nav-link" data-scroll-target="#engineered-features">Engineered Features</a>
+  <li><a href="#imports-and-data-loading" id="toc-imports-and-data-loading" class="nav-link active" data-scroll-target="#imports-and-data-loading">Imports and data loading</a></li>
+  <li><a href="#feature-registry" id="toc-feature-registry" class="nav-link" data-scroll-target="#feature-registry">Feature registry</a></li>
+  <li><a href="#engineered-features" id="toc-engineered-features" class="nav-link" data-scroll-target="#engineered-features">Engineered features</a>
   <ul class="collapse">
   <li><a href="#title-from-name" id="toc-title-from-name" class="nav-link" data-scroll-target="#title-from-name"><code>Title</code> (from <code>Name</code>)</a></li>
   <li><a href="#titlegrouped-from-title" id="toc-titlegrouped-from-title" class="nav-link" data-scroll-target="#titlegrouped-from-title"><code>TitleGrouped</code> (from <code>Title</code>)</a></li>
@@ -354,12 +354,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#agecategory-from-age" id="toc-agecategory-from-age" class="nav-link" data-scroll-target="#agecategory-from-age"><code>AgeCategory</code> (from <code>Age</code>)</a>
   <ul class="collapse">
-  <li><a href="#transformed-features" id="toc-transformed-features" class="nav-link" data-scroll-target="#transformed-features">Transformed Features</a>
+  <li><a href="#transformed-features" id="toc-transformed-features" class="nav-link" data-scroll-target="#transformed-features">Transformed features</a>
   <ul class="collapse">
   <li><a href="#sqrtage-from-age" id="toc-sqrtage-from-age" class="nav-link" data-scroll-target="#sqrtage-from-age"><code>SqrtAge</code> (from <code>Age</code>)</a></li>
   <li><a href="#logfare-from-fare" id="toc-logfare-from-fare" class="nav-link" data-scroll-target="#logfare-from-fare"><code>LogFare</code> (from <code>Fare</code>)</a></li>
   </ul></li>
-  <li><a href="#encoded-features" id="toc-encoded-features" class="nav-link" data-scroll-target="#encoded-features">Encoded Features</a>
+  <li><a href="#encoded-features" id="toc-encoded-features" class="nav-link" data-scroll-target="#encoded-features">Encoded features</a>
   <ul class="collapse">
   <li><a href="#sex" id="toc-sex" class="nav-link" data-scroll-target="#sex"><code>Sex</code></a></li>
   <li><a href="#embarked" id="toc-embarked" class="nav-link" data-scroll-target="#embarked"><code>Embarked</code></a></li>
@@ -367,9 +367,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#agecategory" id="toc-agecategory" class="nav-link" data-scroll-target="#agecategory"><code>AgeCategory</code></a></li>
   <li><a href="#pclass" id="toc-pclass" class="nav-link" data-scroll-target="#pclass"><code>Pclass</code></a></li>
   </ul></li>
-  <li><a href="#final-feature-set" id="toc-final-feature-set" class="nav-link" data-scroll-target="#final-feature-set">Final Feature Set</a></li>
+  <li><a href="#final-feature-set" id="toc-final-feature-set" class="nav-link" data-scroll-target="#final-feature-set">Final feature set</a></li>
   <li><a href="#save-the-processed-dataset" id="toc-save-the-processed-dataset" class="nav-link" data-scroll-target="#save-the-processed-dataset">Save the processed dataset</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -380,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Feature Engineering</h1>
+<h1 class="title">Feature engineering</h1>
 </div>
 
 
@@ -401,10 +401,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Feature engineering is the process of transforming existing variables into new representations that better reflect the underlying structure of the problem. By extracting information from raw fields, combining related variables, and creating more meaningful indicators, we can often provide models with a more informative view of the data than the original features alone.</p>
 <p>The features introduced in this notebook are motivated by the patterns observed during exploratory data analysis. In general, survival on the Titanic appears to have been influenced by factors such as passenger class, gender, age, family structure, and social status. The engineered features below aim to make these factors more explicit and easier for machine learning models to learn from.</p>
 <section id="imports-and-data-loading" class="level2">
-<h2 class="anchored" data-anchor-id="imports-and-data-loading">Imports and Data Loading</h2>
+<h2 class="anchored" data-anchor-id="imports-and-data-loading">Imports and data loading</h2>
 <p>Before creating new features, we load the processed dataset generated in the previous notebook. This dataset already includes missing-value treatment, feature cleaning, and transformations identified during the exploratory analysis stage.</p>
 <p>We then import the libraries required for feature engineering and subsequent preprocessing steps.</p>
-<div id="cell-2" class="cell" data-execution_count="64">
+<div id="cell-2" class="cell" data-execution_count="127">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
@@ -425,12 +425,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-3" class="cell" data-execution_count="65">
+<div id="cell-3" class="cell" data-execution_count="128">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_full.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell-output cell-output-display" data-execution_count="128">
 <div>
 
 
@@ -534,12 +534,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-4" class="cell" data-execution_count="66">
+<div id="cell-4" class="cell" data-execution_count="129">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_features</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="cell-output cell-output-display" data-execution_count="129">
 <div>
 
 
@@ -635,11 +635,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="feature-registry" class="level2">
-<h2 class="anchored" data-anchor-id="feature-registry">Feature Registry</h2>
+<h2 class="anchored" data-anchor-id="feature-registry">Feature registry</h2>
 <p>Throughout this notebook, we maintain a feature registry (<code>df_features</code>) describing each variable in the dataset. In addition to documenting the feature name, type, origin, and description, we introduce a new field named <code>UsedInModel</code>.</p>
 <p>This field indicates whether a feature is included directly in the final design matrix used for model training. At this stage, all features are initialized with the value <code>False</code>. As new features are engineered and existing ones are transformed or encoded, this registry will be updated accordingly.</p>
 <p>Maintaining this registry provides a clear overview of the feature engineering pipeline and helps track the lineage and purpose of every variable created throughout the project.</p>
-<div id="cell-6" class="cell" data-execution_count="67">
+<div id="cell-6" class="cell" data-execution_count="130">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the feature registry</span></span>
@@ -648,14 +648,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="engineered-features" class="level2">
-<h2 class="anchored" data-anchor-id="engineered-features">Engineered Features</h2>
+<h2 class="anchored" data-anchor-id="engineered-features">Engineered features</h2>
 <p>In this section we create entirely new features by extracting or combining information from existing variables.</p>
 <section id="title-from-name" class="level3">
 <h3 class="anchored" data-anchor-id="title-from-name"><code>Title</code> (from <code>Name</code>)</h3>
 <p>During the exploratory data analysis, we observed that passenger names contain valuable information beyond simple identification. In particular, honorific titles such as <code>Mr.</code>, <code>Mrs.</code>, <code>Miss</code>, and <code>Master</code> exhibited markedly different survival rates, suggesting that they capture demographic and social characteristics relevant to the prediction task.</p>
 <p>Rather than using the full <code>Name</code> field, which has very high cardinality and is unsuitable for most machine learning algorithms, we extract only the passenger title. This transformation preserves the informative part of the feature while producing a compact categorical variable that can be readily encoded for modeling.</p>
 <p>Passenger titles follow a consistent pattern in the dataset, appearing between the passenger’s surname and given name. We can therefore extract them efficiently using a regular expression as we already did in the <a href="../notebooks/01_exploratory_data_analysis.html">EDA</a>.</p>
-<div id="cell-9" class="cell" data-execution_count="68">
+<div id="cell-9" class="cell" data-execution_count="131">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_full[<span class="st">"Title"</span>] <span class="op">=</span> df_full[<span class="st">"Name"</span>].<span class="bu">str</span>.extract(<span class="vs">r",</span><span class="dv">\s</span><span class="op">*</span><span class="kw">(</span><span class="pp">[^</span><span class="ch">\.</span><span class="pp">]</span><span class="op">+</span><span class="kw">)</span><span class="ch">\.</span><span class="vs">"</span>, expand<span class="op">=</span><span class="va">False</span>)</span>
@@ -696,7 +696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>As with every feature created throughout this notebook, the newly engineered <code>Title</code> variable is added to the feature registry (<code>df_features</code>). Keeping the registry up to date documents the origin, type, and intended use of each feature, making the feature engineering pipeline easier to understand and reproduce.</p>
-<div id="cell-11" class="cell" data-execution_count="69">
+<div id="cell-11" class="cell" data-execution_count="132">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_features.loc[<span class="bu">len</span>(df_features)] <span class="op">=</span> {</span>
@@ -714,7 +714,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="titlegrouped-from-title"><code>TitleGrouped</code> (from <code>Title</code>)</h3>
 <p>The extracted titles include a handful of common categories together with several rare ones. Some of these rare titles exhibit extreme survival rates simply because they occur only once or twice in the dataset. For example, the title <code>Capt.</code> has a survival rate of 0%, but this “category” consists of a single passenger: Captain Edward Smith, who famously went down with the ship. While this is an interesting historical detail, it provides little statistical evidence for a machine learning model.</p>
 <p>To reduce the impact of such sparsely represented categories, we group infrequent titles into a single <code>Rare</code> category. This preserves the distinction between common and uncommon titles while providing the model with a more robust and generalizable representation of the data.</p>
-<div id="cell-13" class="cell" data-execution_count="70">
+<div id="cell-13" class="cell" data-execution_count="133">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep the most common titles and group the remaining ones as "Rare"</span></span>
@@ -727,7 +727,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>After grouping the infrequent categories, the resulting <code>TitleGrouped</code> feature contains a small number of well-represented categories while still preserving the demographic information identified during the exploratory analysis. This representation is considerably more suitable for machine learning than the <code>Title</code> feature.</p>
-<div id="cell-15" class="cell" data-execution_count="71">
+<div id="cell-15" class="cell" data-execution_count="134">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>title_counts <span class="op">=</span> (</span>
@@ -767,7 +767,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The figure above shows the distribution of the grouped titles. Compared to the original feature, the new representation contains only a few well-populated categories together with a single <code>Rare</code> category, making it more suitable for machine learning models while preserving the distinction between common and uncommon passenger titles.</p>
 <p>As before, we also register the new feature in <code>df_features</code> to document its origin and intended use throughout the remainder of the project.</p>
-<div id="cell-17" class="cell" data-execution_count="72">
+<div id="cell-17" class="cell" data-execution_count="135">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_features.loc[<span class="bu">len</span>(df_features)] <span class="op">=</span> {</span>
@@ -785,7 +785,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="familysize-from-sibsp-and-parch"><code>FamilySize</code> (from <code>SibSp</code> and <code>Parch</code>)</h3>
 <p>During the exploratory analysis, we observed that both <code>SibSp</code> and <code>Parch</code> exhibit a relationship with passenger survival. Rather than treating these variables independently, we combine them into a single feature representing the total number of family members traveling together.</p>
 <p>The new feature, <code>FamilySize</code>, is defined as the number of siblings/spouses (<code>SibSp</code>) plus the number of parents/children (<code>Parch</code>), plus one to include the passenger themselves. This provides a more intuitive measure of the size of each passenger’s travel group.</p>
-<div id="cell-19" class="cell" data-execution_count="73">
+<div id="cell-19" class="cell" data-execution_count="136">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the feature.</span></span>
@@ -806,7 +806,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-20" class="cell" data-execution_count="74">
+<div id="cell-20" class="cell" data-execution_count="137">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -842,7 +842,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The distribution shows that most passengers traveled either alone or with a small number of relatives, while large family groups were comparatively rare. This engineered feature provides a more compact representation of family structure than the original <code>SibSp</code> and <code>Parch</code> variables and may help machine learning models capture patterns associated with group size.</p>
 <p>While <code>FamilySize</code> was designed to capture the overall size of a passenger’s travel group, it is not immediately clear whether this feature has a monotonic or even consistent relationship with survival. Small families may have benefited from coordinated evacuation, whereas larger groups may have faced additional coordination difficulties. Passengers traveling alone may also exhibit distinct survival behavior compared to those traveling with family members.</p>
 <p>To better understand this relationship, we compute the survival rate as a function of <code>FamilySize</code> and compare outcomes across different group sizes.</p>
-<div id="cell-22" class="cell" data-execution_count="75">
+<div id="cell-22" class="cell" data-execution_count="138">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> df_full.loc[df_full[<span class="st">"IsTrainSet"</span>]].copy()</span>
@@ -903,7 +903,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="isalone-from-familysize"><code>IsAlone</code> (from <code>FamilySize</code>)</h3>
 <p>The previous analysis showed that <code>FamilySize</code> is associated with survival in a non-linear way. In particular, passengers traveling alone and those in very large families tend to exhibit lower survival rates compared to passengers in small family groups.</p>
 <p>This suggests that the <em>presence or absence of companions</em>, rather than the exact group size, may be a more informative signal for prediction. To capture this effect more directly, we derive a binary feature indicating whether a passenger was traveling alone.</p>
-<div id="cell-25" class="cell" data-execution_count="76">
+<div id="cell-25" class="cell" data-execution_count="139">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create feature</span></span>
@@ -922,7 +922,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>FamilySize</code> feature suggested that passengers traveling alone exhibit distinct survival behavior compared to those traveling with family members. However, this effect may be driven primarily by the binary distinction between traveling alone versus not alone, rather than the exact number of relatives aboard.</p>
 <p>To investigate this hypothesis more directly, we define a binary indicator feature, <code>IsAlone</code>, and analyze how survival rates differ between these two groups.</p>
-<div id="cell-27" class="cell" data-execution_count="77">
+<div id="cell-27" class="cell" data-execution_count="140">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> df_full.loc[df_full[<span class="st">"IsTrainSet"</span>]].copy()</span>
@@ -974,7 +974,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="ticketgroupsize-from-ticket"><code>TicketGroupSize</code> (from <code>Ticket</code>)</h3>
 <p>Although the <code>Ticket</code> feature appears to be a simple identifier, inspection of the dataset suggests that multiple passengers may share the same ticket number. This typically indicates that they were part of a larger booking group or traveling arrangement, which is not necessarily captured by family relationships alone (<code>SibSp</code> and <code>Parch</code>).</p>
 <p>We therefore hypothesize that the number of passengers sharing the same ticket may provide additional information about social and economic grouping, which could be relevant for survival outcomes.</p>
-<div id="cell-30" class="cell" data-execution_count="78">
+<div id="cell-30" class="cell" data-execution_count="141">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create feature</span></span>
@@ -993,7 +993,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>TicketGroupSize</code> feature captures the size of passenger groups sharing the same ticket, which may reflect broader booking or travel arrangements beyond immediate family relationships. However, it is not immediately clear whether larger ticket groups are associated with higher or lower survival probabilities.</p>
 <p>To investigate this relationship, we analyze survival rates across different ticket group sizes, allowing us to assess whether this feature contains meaningful predictive signal.</p>
-<div id="cell-32" class="cell" data-execution_count="79">
+<div id="cell-32" class="cell" data-execution_count="142">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> df_full.loc[df_full[<span class="st">"IsTrainSet"</span>]].copy()</span>
@@ -1044,7 +1044,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1><code>AgeCategory</code> (from <code>Age</code>)</h1>
 <p>The relationship between age and survival is unlikely to be linear. Historical accounts suggest that children were given priority during evacuation, while survival patterns among adults and older passengers may differ in more complex ways.</p>
 <p>To capture these potential non-linear effects more effectively, we transform <code>Age</code> into a categorical variable by grouping passengers into meaningful age ranges. This allows the model to learn age-related patterns without assuming a strictly linear relationship.</p>
-<div id="cell-35" class="cell" data-execution_count="80">
+<div id="cell-35" class="cell" data-execution_count="143">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create feature</span></span>
@@ -1069,7 +1069,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>AgeCategory</code> feature was introduced to capture potential non-linear effects of age on survival. While the transformation groups passengers into meaningful demographic segments, it is still necessary to verify whether these groups exhibit distinct survival patterns.</p>
 <p>To assess this, we compare survival rates across the different age categories.</p>
-<div id="cell-37" class="cell" data-execution_count="81">
+<div id="cell-37" class="cell" data-execution_count="144">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_plot <span class="op">=</span> df_full.loc[df_full[<span class="st">"IsTrainSet"</span>]].copy()</span>
@@ -1115,14 +1115,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The results show clear differences in survival rates across age categories. Children exhibit the highest survival probability, consistent with evacuation priorities, while adults and older passengers show comparatively lower survival rates.</p>
 <p>These patterns confirm that age has a non-linear relationship with survival and justify the transformation of <code>Age</code> into a categorical representation. <code>AgeCategory</code> therefore provides a more structured and model-friendly encoding of age-related effects than the raw continuous variable.</p>
 <section id="transformed-features" class="level2">
-<h2 class="anchored" data-anchor-id="transformed-features">Transformed Features</h2>
+<h2 class="anchored" data-anchor-id="transformed-features">Transformed features</h2>
 <p>In contrast to engineered features, which introduce new representations of the data, transformed features modify the distribution or scale of existing variables without changing their underlying meaning.</p>
 <p>These transformations are particularly useful for reducing skewness, stabilizing variance, and improving the suitability of features for machine learning algorithms that are sensitive to scale and distributional assumptions.</p>
 <section id="sqrtage-from-age" class="level3">
 <h3 class="anchored" data-anchor-id="sqrtage-from-age"><code>SqrtAge</code> (from <code>Age</code>)</h3>
 <p>Although <code>Age</code> is less skewed than <code>Fare</code>, its distribution still exhibits mild right skewness due to the presence of relatively fewer older passengers.</p>
 <p>A square root transformation provides a gentle correction to this skewness while preserving interpretability and maintaining the continuous nature of the variable.</p>
-<div id="cell-41" class="cell" data-execution_count="82">
+<div id="cell-41" class="cell" data-execution_count="145">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create feature</span></span>
@@ -1139,7 +1139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-42" class="cell" data-execution_count="83">
+<div id="cell-42" class="cell" data-execution_count="146">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -1170,7 +1170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="logfare-from-fare"><code>LogFare</code> (from <code>Fare</code>)</h3>
 <p>The <code>Fare</code> feature exhibits a highly skewed distribution, with a small number of passengers paying significantly higher ticket prices. Such extreme values can disproportionately influence certain machine learning models.</p>
 <p>To mitigate this effect, we apply a logarithmic transformation to compress the range of values and reduce skewness while preserving the relative ordering of observations.</p>
-<div id="cell-45" class="cell" data-execution_count="84">
+<div id="cell-45" class="cell" data-execution_count="147">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create feature</span></span>
@@ -1187,7 +1187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-46" class="cell" data-execution_count="85">
+<div id="cell-46" class="cell" data-execution_count="148">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -1216,7 +1216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="encoded-features" class="level2">
-<h2 class="anchored" data-anchor-id="encoded-features">Encoded Features</h2>
+<h2 class="anchored" data-anchor-id="encoded-features">Encoded features</h2>
 <p>After feature engineering and transformation, several variables remain in categorical form. Most machine learning algorithms require numerical input, so these features must be converted into suitable representations while preserving their informational content.</p>
 <p>In this section, we encode selected categorical variables into numerical form. The objective is to make these features directly usable by machine learning models without introducing artificial ordinal relationships or losing structural meaning.</p>
 <p>The encoding step is restricted to features that represent categorical structure. Continuous and count-based variables that already carry meaningful magnitude information, such as <code>TicketGroupSize</code>, are retained in their original form to preserve their interpretability and signal.</p>
@@ -1224,21 +1224,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="sex"><code>Sex</code></h3>
 <p>The <code>Sex</code> feature showed one of the strongest relationships with survival during exploratory analysis, with female passengers exhibiting significantly higher survival rates than male passengers.</p>
 <p>To make this information usable by machine learning models, we convert the categorical variable into a binary numerical representation while preserving its full informational content.</p>
-<div id="cell-50" class="cell" data-execution_count="86">
+<div id="cell-50" class="cell" data-execution_count="149">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Encode Sex as binary feature</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_full[<span class="st">"Sex"</span>] <span class="op">=</span> df_full[<span class="st">"Sex"</span>].<span class="bu">map</span>({<span class="st">"male"</span>: <span class="dv">0</span>, <span class="st">"female"</span>: <span class="dv">1</span>})</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Register encoded feature in df_features</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>df_features.loc[<span class="bu">len</span>(df_features)] <span class="op">=</span> {</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Name"</span>: <span class="st">"Sex"</span>,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Type"</span>: <span class="st">"indicator"</span>,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Category"</span>: <span class="st">"encoded"</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Source"</span>: <span class="st">"Sex"</span>,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"UsedInModel"</span>: <span class="va">True</span>,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Description"</span>: <span class="st">"Binary encoding of passenger sex (0 = male, 1 = female)."</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>df_features.loc[</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    df_features[<span class="st">"Name"</span>] <span class="op">==</span> <span class="st">"Sex"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Type"</span>, <span class="st">"Category"</span>, <span class="st">"Description"</span>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>] <span class="op">=</span> [</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"indicator"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"encoded"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Binary encoding of passenger sex (0 = male, 1 = female)."</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -1246,7 +1247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="embarked"><code>Embarked</code></h3>
 <p>The <code>Embarked</code> feature indicates the port where each passenger boarded the Titanic. While this variable does not directly determine survival, exploratory analysis suggested differences in survival rates across embarkation points, likely reflecting underlying passenger composition.</p>
 <p>To incorporate this information into machine learning models, we apply one-hot encoding, ensuring that no artificial ordering is imposed on the categories.</p>
-<div id="cell-52" class="cell" data-execution_count="87">
+<div id="cell-52" class="cell" data-execution_count="150">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-hot encode Embarked</span></span>
@@ -1271,7 +1272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="titlegrouped"><code>TitleGrouped</code></h3>
 <p>The <code>TitleGrouped</code> feature captures passenger social status and demographic roles in a compact categorical form derived from <code>Name</code>. During exploratory analysis, this variable showed strong separation in survival rates, particularly between common titles such as <code>Mr</code>, <code>Mrs</code>, <code>Miss</code>, <code>Master</code>, and a grouped <code>Rare</code> category.</p>
 <p>To incorporate this structured social signal into machine learning models, we apply one-hot encoding, ensuring that each title category is represented without imposing any ordinal relationship.</p>
-<div id="cell-54" class="cell" data-execution_count="88">
+<div id="cell-54" class="cell" data-execution_count="151">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-hot encode TitleGrouped</span></span>
@@ -1296,7 +1297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="agecategory"><code>AgeCategory</code></h3>
 <p>The <code>AgeCategory</code> feature captures meaningful age segments with distinct survival patterns. However, as a categorical variable, it cannot be directly used by most machine learning models.</p>
 <p>To incorporate this information into the modeling pipeline without imposing artificial ordinal relationships, we apply one-hot encoding to represent each age group as a separate binary feature.</p>
-<div id="cell-56" class="cell" data-execution_count="89">
+<div id="cell-56" class="cell" data-execution_count="152">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-hot encode AgeCategory</span></span>
@@ -1323,7 +1324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To incorporate this feature into machine learning models, we preserve its ordinal nature through a direct numerical encoding, allowing models to exploit its inherent ordering.</p>
 <p>Unlike the other features encoded in this section, <code>Pclass</code> is already represented numerically in the original dataset. However, its values are not arbitrary integers. They encode an inherent ordering corresponding to passenger socioeconomic status, with first class representing the highest status and third class the lowest.</p>
 <p>For this reason, no additional encoding is required. We simply retain <code>Pclass</code> in its original numerical form, allowing machine learning models to exploit its ordinal structure directly.</p>
-<div id="cell-58" class="cell" data-execution_count="90">
+<div id="cell-58" class="cell" data-execution_count="153">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure correct type</span></span>
@@ -1340,10 +1341,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="final-feature-set" class="level2">
-<h2 class="anchored" data-anchor-id="final-feature-set">Final Feature Set</h2>
+<h2 class="anchored" data-anchor-id="final-feature-set">Final feature set</h2>
 <p>At this stage, all feature engineering, transformations, and encoding steps have been completed. The dataset now contains both the original variables and the newly created features, some of which represent alternative views of the same underlying information.</p>
 <p>To avoid redundancy during model training, we use the feature registry (<code>df_features</code>) to identify the subset of variables that will be included in the machine learning models. The <code>UsedInModel</code> column records this decision, providing a transparent and reproducible specification of the final feature set.</p>
-<div id="cell-61" class="cell" data-execution_count="91">
+<div id="cell-61" class="cell" data-execution_count="154">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original features</span></span>
@@ -1399,13 +1400,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>] <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-62" class="cell" data-execution_count="92">
+<div id="cell-62" class="cell" data-execution_count="155">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Features not used in the modeling stage</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_features.loc[<span class="op">~</span>df_features[<span class="st">"UsedInModel"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="92">
+<div class="cell-output cell-output-display" data-execution_count="155">
 <div>
 
 
@@ -1482,13 +1483,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-63" class="cell" data-execution_count="93">
+<div id="cell-63" class="cell" data-execution_count="156">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Features that will be used in the modeling stage</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_features.loc[df_features[<span class="st">"UsedInModel"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="93">
+<div class="cell-output cell-output-display" data-execution_count="156">
 <div>
 
 
@@ -1517,10 +1518,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <th data-quarto-table-cell-role="th">2</th>
 <td>Sex</td>
-<td>categorical</td>
-<td>original</td>
+<td>indicator</td>
+<td>encoded</td>
 <td>Sex</td>
-<td>Passenger's sex (`male` or `female`).</td>
+<td>Binary encoding of passenger sex (0 = male, 1 ...</td>
 <td>True</td>
 </tr>
 <tr class="odd">
@@ -1606,16 +1607,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">17</th>
-<td>Sex</td>
+<td>Embarked_C</td>
 <td>indicator</td>
 <td>encoded</td>
-<td>Sex</td>
-<td>Binary encoding of passenger sex (0 = male, 1 ...</td>
+<td>Embarked</td>
+<td>One-hot encoding of embarkation port.</td>
 <td>True</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">18</th>
-<td>Embarked_C</td>
+<td>Embarked_Q</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>Embarked</td>
@@ -1624,7 +1625,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">19</th>
-<td>Embarked_Q</td>
+<td>Embarked_S</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>Embarked</td>
@@ -1633,16 +1634,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">20</th>
-<td>Embarked_S</td>
+<td>Title_Master</td>
 <td>indicator</td>
 <td>encoded</td>
-<td>Embarked</td>
-<td>One-hot encoding of embarkation port.</td>
+<td>TitleGrouped</td>
+<td>One-hot encoding of grouped passenger titles c...</td>
 <td>True</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">21</th>
-<td>Title_Master</td>
+<td>Title_Miss</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>TitleGrouped</td>
@@ -1651,7 +1652,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">22</th>
-<td>Title_Miss</td>
+<td>Title_Mr</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>TitleGrouped</td>
@@ -1660,7 +1661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">23</th>
-<td>Title_Mr</td>
+<td>Title_Mrs</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>TitleGrouped</td>
@@ -1669,7 +1670,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">24</th>
-<td>Title_Mrs</td>
+<td>Title_Rare</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>TitleGrouped</td>
@@ -1678,16 +1679,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">25</th>
-<td>Title_Rare</td>
+<td>Age_Child</td>
 <td>indicator</td>
 <td>encoded</td>
-<td>TitleGrouped</td>
-<td>One-hot encoding of grouped passenger titles c...</td>
+<td>AgeCategory</td>
+<td>One-hot encoded age category derived from Age.</td>
 <td>True</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">26</th>
-<td>Age_Child</td>
+<td>Age_Teen</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>AgeCategory</td>
@@ -1696,7 +1697,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">27</th>
-<td>Age_Teen</td>
+<td>Age_YoungAdult</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>AgeCategory</td>
@@ -1705,7 +1706,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">28</th>
-<td>Age_YoungAdult</td>
+<td>Age_Adult</td>
 <td>indicator</td>
 <td>encoded</td>
 <td>AgeCategory</td>
@@ -1714,15 +1715,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">29</th>
-<td>Age_Adult</td>
-<td>indicator</td>
-<td>encoded</td>
-<td>AgeCategory</td>
-<td>One-hot encoded age category derived from Age.</td>
-<td>True</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">30</th>
 <td>Age_Senior</td>
 <td>indicator</td>
 <td>encoded</td>
@@ -1741,7 +1733,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="save-the-processed-dataset">Save the processed dataset</h2>
 <p>At this stage, feature engineering, transformations, and encoding have been completed. The resulting dataset contains the original variables together with the engineered and transformed features that will be used throughout the modeling stage. The feature registry (<code>df_features</code>) also records the origin, type, and modeling status of every feature, providing a transparent specification of the final feature set.</p>
 <p>To avoid repeating these preprocessing steps in subsequent notebooks, we save both the processed dataset and the updated feature registry to disk.</p>
-<div id="cell-65" class="cell" data-execution_count="94">
+<div id="cell-65" class="cell" data-execution_count="157">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save dataframes in parquet format to preserve data types</span></span>
@@ -1758,7 +1750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
 <p>The dataset is now fully prepared for machine learning. In the <a href="../notebooks/03_modeling_and_evaluation.html">next notebook</a>, we will construct the modeling dataset, split the data into training and validation sets, train several classification algorithms, and compare their predictive performance. We will also evaluate feature importance and model behavior to better understand the factors that contribute to passenger survival.</p>
 
 
