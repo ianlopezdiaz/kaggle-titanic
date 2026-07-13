@@ -317,6 +317,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
+    <a class="nav-link" href="https://ianlopezdiaz.github.io/kaggle-titanic-pt"> 
+<span class="menu-text">🇧🇷 Português</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="https://ianlopezdiaz.github.io/portfolio"> 
 <span class="menu-text">Portfolio</span></a>
   </li>  
@@ -433,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-libraries" class="level3">
 <h3 class="anchored" data-anchor-id="import-libraries">Import libraries</h3>
 <p>We begin by importing the libraries required for model development and evaluation. These include tools for data manipulation, dataset splitting, machine learning algorithms, performance metrics, and visualization of the results.</p>
-<div id="cell-4" class="cell" data-execution_count="358">
+<div id="cell-4" class="cell" data-execution_count="40">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
@@ -465,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="loading-the-data">Loading the data</h3>
 <p>We begin by loading the processed dataset and feature registry produced in the previous notebook. At this stage, all preprocessing, feature engineering, transformations, and encoding steps have already been completed, allowing us to focus exclusively on model development and evaluation.</p>
 <p>The feature registry provides a centralized specification of every available feature and indicates which variables should be included in the machine learning models.</p>
-<div id="cell-6" class="cell" data-execution_count="359">
+<div id="cell-6" class="cell" data-execution_count="41">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed dataset and feature registry</span></span>
@@ -473,12 +477,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_features <span class="op">=</span> pd.read_parquet(<span class="st">"../data/processed/02_features.parquet"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-7" class="cell" data-execution_count="360">
+<div id="cell-7" class="cell" data-execution_count="42">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_full.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="360">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <div>
 
 
@@ -637,12 +641,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="361">
+<div id="cell-8" class="cell" data-execution_count="43">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_features.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="361">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <div>
 
 
@@ -714,7 +718,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="separate-the-training-and-test-sets" class="level3">
 <h3 class="anchored" data-anchor-id="separate-the-training-and-test-sets">Separate the training and test sets</h3>
 <p>The original Kaggle Titanic dataset provides separate training and test sets. Throughout the preprocessing pipeline, this distinction was preserved using the <code>IsTrainSet</code> indicator. We now use this flag to reconstruct the original split, ensuring that models are trained only on labeled data while retaining the unlabeled test set for generating the final competition predictions.</p>
-<div id="cell-10" class="cell" data-execution_count="362">
+<div id="cell-10" class="cell" data-execution_count="44">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> df_features.loc[</span>
@@ -732,7 +736,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="feature-selection" class="level3">
 <h3 class="anchored" data-anchor-id="feature-selection">Feature selection</h3>
 <p>The <a href="../notebooks/02_feature_engineering.html">feature engineering notebook</a> produced a feature registry describing every variable available in the dataset together with metadata such as its origin, type, and whether it should be included in the modeling stage. We use this registry to construct the final feature matrix, ensuring that model training is based on a transparent and reproducible feature selection process.</p>
-<div id="cell-12" class="cell" data-execution_count="363">
+<div id="cell-12" class="cell" data-execution_count="45">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select features marked for modeling</span></span>
@@ -743,7 +747,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>selected_features</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="363">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <pre><code>['Pclass',
  'Sex',
  'Age',
@@ -785,7 +789,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="instantiate-the-model">Instantiate the model</h3>
 <p>The first step is to instantiate the Dummy classifier. Unlike predictive machine learning models, the Dummy classifier does not learn patterns from the input features. Instead, it serves as a simple baseline by following a predefined prediction strategy.</p>
 <p>Here, we use the <strong>most frequent</strong> strategy, which always predicts the majority class observed in the training data. This provides a reference level of performance that more sophisticated models should be able to surpass.</p>
-<div id="cell-16" class="cell" data-execution_count="364">
+<div id="cell-16" class="cell" data-execution_count="46">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate the dummy classifier</span></span>
@@ -798,14 +802,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="train-the-model">Train the model</h3>
 <p>Before a machine learning model can make predictions, it must first be trained using the available labeled data. During this training phase, the model learns the relationship between the input features and the target variable.</p>
 <p>For the dummy classifier, however, there is effectively nothing to learn from the feature values themselves. The <strong>most frequent</strong> strategy simply determines which class appears most often in the training set and stores this information for future predictions.</p>
-<div id="cell-18" class="cell" data-execution_count="365">
+<div id="cell-18" class="cell" data-execution_count="47">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the baseline classifier</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dummy.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="365">
-<style>#sk-container-id-29 {
+<div class="cell-output cell-output-display" data-execution_count="47">
+<style>#sk-container-id-4 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -836,15 +840,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }
 
-#sk-container-id-29 {
+#sk-container-id-4 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-29 pre {
+#sk-container-id-4 pre {
   padding: 0;
 }
 
-#sk-container-id-29 input.sk-hidden--visually {
+#sk-container-id-4 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -856,7 +860,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 1px;
 }
 
-#sk-container-id-29 div.sk-dashed-wrapped {
+#sk-container-id-4 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -864,7 +868,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-29 div.sk-container {
+#sk-container-id-4 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -874,7 +878,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   position: relative;
 }
 
-#sk-container-id-29 div.sk-text-repr-fallback {
+#sk-container-id-4 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -890,14 +894,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-29 div.sk-parallel-item::after {
+#sk-container-id-4 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-29 div.sk-parallel {
+#sk-container-id-4 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -905,28 +909,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-29 div.sk-parallel-item {
+#sk-container-id-4 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-29 div.sk-parallel-item:first-child::after {
+#sk-container-id-4 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-29 div.sk-parallel-item:last-child::after {
+#sk-container-id-4 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-29 div.sk-parallel-item:only-child::after {
+#sk-container-id-4 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-29 div.sk-serial {
+#sk-container-id-4 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -944,14 +948,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-29 div.sk-toggleable {
+#sk-container-id-4 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-29 label.sk-toggleable__label {
+#sk-container-id-4 label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -964,13 +968,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-29 label.sk-toggleable__label .caption {
+#sk-container-id-4 label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-29 label.sk-toggleable__label-arrow:before {
+#sk-container-id-4 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -978,25 +982,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-29 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-29 div.sk-toggleable__content {
+#sk-container-id-4 div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-29 div.sk-toggleable__content.fitted {
+#sk-container-id-4 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-29 div.sk-toggleable__content pre {
+#sk-container-id-4 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1004,79 +1008,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-29 div.sk-toggleable__content.fitted pre {
+#sk-container-id-4 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-29 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-29 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-29 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-29 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-4 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-29 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-29 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-4 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-29 div.sk-label label.sk-toggleable__label,
-#sk-container-id-29 div.sk-label label {
+#sk-container-id-4 div.sk-label label.sk-toggleable__label,
+#sk-container-id-4 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-29 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-29 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-4 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-29 div.sk-label label {
+#sk-container-id-4 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-29 div.sk-label-container {
+#sk-container-id-4 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-29 div.sk-estimator {
+#sk-container-id-4 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1086,18 +1090,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-29 div.sk-estimator.fitted {
+#sk-container-id-4 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-29 div.sk-estimator:hover {
+#sk-container-id-4 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-29 div.sk-estimator.fitted:hover {
+#sk-container-id-4 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1185,7 +1189,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-29 a.estimator_doc_link {
+#sk-container-id-4 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1200,21 +1204,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-29 a.estimator_doc_link.fitted {
+#sk-container-id-4 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-29 a.estimator_doc_link:hover {
+#sk-container-id-4 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-29 a.estimator_doc_link.fitted:hover {
+#sk-container-id-4 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -1282,7 +1286,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-29" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DummyClassifier(strategy='most_frequent')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-29" type="checkbox" checked=""><label for="sk-estimator-id-29" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DummyClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.dummy.DummyClassifier.html">?<span>Documentation for DummyClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DummyClassifier(strategy='most_frequent')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" checked=""><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DummyClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.dummy.DummyClassifier.html">?<span>Documentation for DummyClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -1358,7 +1362,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <section id="make-predictions" class="level3">
 <h3 class="anchored" data-anchor-id="make-predictions">Make predictions</h3>
 <p>Once the model has been trained, it can be used to predict the target variable for new observations. Here, we generate predictions for the training set itself in order to inspect the behavior of the baseline classifier.</p>
-<div id="cell-20" class="cell" data-execution_count="366">
+<div id="cell-20" class="cell" data-execution_count="48">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the training set</span></span>
@@ -1366,7 +1370,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </details>
 </div>
 <p>At this point, we could display the contents of <code>y_pred</code>, but the output would simply be a long array of predicted class labels that is difficult to interpret. Instead, we summarize the predictions by counting how many passengers the model classified into each category. This provides a much clearer picture of the model’s behavior.</p>
-<div id="cell-22" class="cell" data-execution_count="367">
+<div id="cell-22" class="cell" data-execution_count="49">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prediction_counts <span class="op">=</span> (</span>
@@ -1400,7 +1404,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="evaluate-the-accuracy">Evaluate the accuracy</h3>
 <p>Accuracy is the simplest and most commonly reported metric for classification problems. It measures the proportion of observations that were correctly classified by the model.</p>
 <p>An accuracy of 1.0 indicates perfect predictions, whereas an accuracy of 0.5 means that the model correctly classified half of the observations. Although accuracy provides a useful overall measure of performance, it does not distinguish between different types of prediction errors. As we will see later, additional metrics are often needed to obtain a more complete assessment of a classifier.</p>
-<div id="cell-25" class="cell" data-execution_count="368">
+<div id="cell-25" class="cell" data-execution_count="50">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the training accuracy</span></span>
@@ -1427,7 +1431,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="instantiate-the-model-1">Instantiate the model</h3>
 <p>The first step is to instantiate the Logistic Regression classifier. At this stage, we simply create the model object without performing any training. The learning process only begins once the model is fitted to the training data.</p>
 <p>For this example, we use the default implementation provided by scikit-learn, specifying only a fixed <code>random_state</code> to ensure reproducible results across different runs.</p>
-<div id="cell-29" class="cell" data-execution_count="369">
+<div id="cell-29" class="cell" data-execution_count="51">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate the Logistic Regression classifier</span></span>
@@ -1443,14 +1447,14 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="train-the-model-1">Train the model</h3>
 <p>Once the model has been instantiated, the next step is to train it using the available labeled data. During training, Logistic Regression learns the relationship between the input features and the target variable by estimating a set of coefficients that best separate the two classes.</p>
 <p>Unlike the Dummy classifier, which ignores the feature values, Logistic Regression uses the training data to identify patterns that help distinguish passengers who survived from those who did not.</p>
-<div id="cell-31" class="cell" data-execution_count="370">
+<div id="cell-31" class="cell" data-execution_count="52">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the Logistic Regression classifier</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>logistic.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="370">
-<style>#sk-container-id-30 {
+<div class="cell-output cell-output-display" data-execution_count="52">
+<style>#sk-container-id-5 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -1481,15 +1485,15 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   }
 }
 
-#sk-container-id-30 {
+#sk-container-id-5 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-30 pre {
+#sk-container-id-5 pre {
   padding: 0;
 }
 
-#sk-container-id-30 input.sk-hidden--visually {
+#sk-container-id-5 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -1501,7 +1505,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   width: 1px;
 }
 
-#sk-container-id-30 div.sk-dashed-wrapped {
+#sk-container-id-5 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -1509,7 +1513,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-30 div.sk-container {
+#sk-container-id-5 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -1519,7 +1523,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   position: relative;
 }
 
-#sk-container-id-30 div.sk-text-repr-fallback {
+#sk-container-id-5 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -1535,14 +1539,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-30 div.sk-parallel-item::after {
+#sk-container-id-5 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-30 div.sk-parallel {
+#sk-container-id-5 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1550,28 +1554,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-30 div.sk-parallel-item {
+#sk-container-id-5 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-30 div.sk-parallel-item:first-child::after {
+#sk-container-id-5 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-30 div.sk-parallel-item:last-child::after {
+#sk-container-id-5 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-30 div.sk-parallel-item:only-child::after {
+#sk-container-id-5 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-30 div.sk-serial {
+#sk-container-id-5 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1589,14 +1593,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-30 div.sk-toggleable {
+#sk-container-id-5 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-30 label.sk-toggleable__label {
+#sk-container-id-5 label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -1609,13 +1613,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-30 label.sk-toggleable__label .caption {
+#sk-container-id-5 label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-30 label.sk-toggleable__label-arrow:before {
+#sk-container-id-5 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -1623,25 +1627,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-30 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-30 div.sk-toggleable__content {
+#sk-container-id-5 div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-30 div.sk-toggleable__content.fitted {
+#sk-container-id-5 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-30 div.sk-toggleable__content pre {
+#sk-container-id-5 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1649,79 +1653,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-30 div.sk-toggleable__content.fitted pre {
+#sk-container-id-5 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-30 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-30 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-30 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-30 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-5 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-30 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-30 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-5 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-30 div.sk-label label.sk-toggleable__label,
-#sk-container-id-30 div.sk-label label {
+#sk-container-id-5 div.sk-label label.sk-toggleable__label,
+#sk-container-id-5 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-30 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-30 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-5 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-30 div.sk-label label {
+#sk-container-id-5 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-30 div.sk-label-container {
+#sk-container-id-5 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-30 div.sk-estimator {
+#sk-container-id-5 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1731,18 +1735,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-30 div.sk-estimator.fitted {
+#sk-container-id-5 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-30 div.sk-estimator:hover {
+#sk-container-id-5 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-30 div.sk-estimator.fitted:hover {
+#sk-container-id-5 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1830,7 +1834,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-30 a.estimator_doc_link {
+#sk-container-id-5 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1845,21 +1849,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-30 a.estimator_doc_link.fitted {
+#sk-container-id-5 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-30 a.estimator_doc_link:hover {
+#sk-container-id-5 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-30 a.estimator_doc_link.fitted:hover {
+#sk-container-id-5 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -1927,7 +1931,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-30" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(max_iter=1000, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-30" type="checkbox" checked=""><label for="sk-estimator-id-30" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(max_iter=1000, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" checked=""><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -2064,7 +2068,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="make-predictions-1">Make predictions</h3>
 <p>After the model has been trained, it can be used to predict the survival outcome for each passenger in the training set. Unlike the Dummy classifier, which assigns the same label to every observation, Logistic Regression uses the learned relationships between the features and the target variable to produce individualized predictions for each passenger.</p>
 <p>These predictions can then be compared with the true labels to evaluate the model’s performance.</p>
-<div id="cell-33" class="cell" data-execution_count="371">
+<div id="cell-33" class="cell" data-execution_count="53">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the training set</span></span>
@@ -2072,7 +2076,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </details>
 </div>
 <p>As before, displaying the full contents of <code>y_pred</code> would produce a long sequence of predicted class labels that offers little insight. Instead, we summarize the predictions by counting how many passengers were classified into each outcome, making it easier to understand the model’s overall behavior.</p>
-<div id="cell-35" class="cell" data-execution_count="372">
+<div id="cell-35" class="cell" data-execution_count="54">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>prediction_counts <span class="op">=</span> (</span>
@@ -2105,7 +2109,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <section id="evaluate-the-accuracy-1" class="level3">
 <h3 class="anchored" data-anchor-id="evaluate-the-accuracy-1">Evaluate the accuracy</h3>
 <p>We begin by computing the training accuracy of the Logistic Regression model. Comparing this value with the baseline established by the Dummy classifier provides an initial indication of how much predictive information the model has learned from the available features.</p>
-<div id="cell-38" class="cell" data-execution_count="373">
+<div id="cell-38" class="cell" data-execution_count="55">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the training accuracy</span></span>
@@ -2123,7 +2127,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="evaluate-the-precision">Evaluate the precision</h3>
 <p>While accuracy provides an overall measure of performance, precision allows us to examine how reliable the model’s positive predictions are. For the Titanic problem, this means evaluating how often passengers predicted as survivors were actually survivors.</p>
 <p>We now compute the precision score to better understand the type of errors made by the Logistic Regression model.</p>
-<div id="cell-41" class="cell" data-execution_count="374">
+<div id="cell-41" class="cell" data-execution_count="56">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute precision</span></span>
@@ -2145,7 +2149,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="evaluate-the-recall">Evaluate the recall</h3>
 <p>Recall provides another perspective on the Logistic Regression model by measuring its ability to correctly identify passengers who survived. While precision focuses on the reliability of positive predictions, recall focuses on how many actual survivors were successfully detected by the model.</p>
 <p>We now compute the recall score to evaluate how effectively the classifier captures the positive class.</p>
-<div id="cell-44" class="cell" data-execution_count="375">
+<div id="cell-44" class="cell" data-execution_count="57">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute recall</span></span>
@@ -2167,7 +2171,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="evaluate-the-f1-score">Evaluate the F1-score</h3>
 <p>The F1-score provides a single measure that combines precision and recall, offering a balanced view of the model’s ability to identify survivors while maintaining reliable positive predictions.</p>
 <p>Because precision and recall capture different aspects of classification performance, the F1-score is useful when we want to consider both types of errors simultaneously. We now compute the F1-score to summarize the Logistic Regression model’s performance on the positive class.</p>
-<div id="cell-47" class="cell" data-execution_count="376">
+<div id="cell-47" class="cell" data-execution_count="58">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute F1-score</span></span>
@@ -2189,7 +2193,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="visualize-the-confusion-matrix">Visualize the confusion matrix</h3>
 <p>The confusion matrix provides a more detailed view of the Logistic Regression model’s predictions by showing the number of correct and incorrect classifications for each class.</p>
 <p>While metrics such as accuracy, precision, recall, and F1-score summarize model performance into single values, the confusion matrix allows us to directly inspect the types of errors made by the classifier. This helps identify whether the model is more likely to incorrectly classify survivors or non-survivors.</p>
-<div id="cell-50" class="cell" data-execution_count="377">
+<div id="cell-50" class="cell" data-execution_count="59">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> ConfusionMatrixDisplay</span>
@@ -2219,7 +2223,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>So far, the evaluation metrics have been computed using the same data that was used to train the model. While this provides information about how well the model fits the training data, it does not provide a reliable estimate of how it will perform on unseen observations.</p>
 <p>Cross-validation addresses this limitation by repeatedly splitting the training data into different subsets. The model is trained on part of the data and evaluated on the remaining portion, allowing us to estimate how consistently it performs across different samples.</p>
 <p>For classification problems, we use <strong>Stratified K-Fold cross-validation</strong>, which preserves the proportion of each class in every fold. This is particularly important for the Titanic dataset because the survival classes are not perfectly balanced.</p>
-<div id="cell-53" class="cell" data-execution_count="378">
+<div id="cell-53" class="cell" data-execution_count="60">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_val_score</span>
@@ -2261,7 +2265,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="helper-functions">Helper functions</h3>
 <p>The evaluation process used for Logistic Regression involved several repeated steps: training the model, generating predictions, computing evaluation metrics, and estimating performance through cross-validation.</p>
 <p>Since these operations will be repeated for every classifier considered in this project, we encapsulate them into a reusable function. This ensures that all models are evaluated using the same procedure, making the comparison between algorithms more consistent and reducing duplicated code.</p>
-<div id="cell-57" class="cell" data-execution_count="379">
+<div id="cell-57" class="cell" data-execution_count="61">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -2376,7 +2380,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h4 class="anchored" data-anchor-id="results-table">Results table</h4>
 <p>To compare different classifiers consistently, we store the evaluation results from each model in a single table. This allows us to track the performance of multiple algorithms using the same set of metrics and makes the final model comparison more transparent.</p>
 <p>The results table will be updated as new models are trained and evaluated throughout the remainder of the notebook.</p>
-<div id="cell-59" class="cell" data-execution_count="380">
+<div id="cell-59" class="cell" data-execution_count="62">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize results storage</span></span>
@@ -2391,7 +2395,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <section id="baseline-dummy-classifier" class="level3">
 <h3 class="anchored" data-anchor-id="baseline-dummy-classifier">Baseline: dummy classifier</h3>
 <p>The Dummy classifier is re-evaluated using the new evaluation pipeline to confirm that the automated workflow reproduces the baseline results obtained previously. Since this model provides a reference level of performance, maintaining consistency here is important before moving on to more complex classifiers.</p>
-<div id="cell-61" class="cell" data-execution_count="381">
+<div id="cell-61" class="cell" data-execution_count="63">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dummy, result <span class="op">=</span> evaluate_model(</span>
@@ -2407,7 +2411,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>df_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="381">
+<div class="cell-output cell-output-display" data-execution_count="63">
 <div>
 
 
@@ -2437,7 +2441,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.5</td>
 <td>0.616163</td>
 <td>0.002325</td>
-<td>0.00059</td>
+<td>0.000632</td>
 </tr>
 </tbody>
 </table>
@@ -2449,7 +2453,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <section id="logistic-regression-1" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression-1">Logistic regression</h3>
 <p>Logistic Regression is also evaluated using the automated pipeline. This serves as a second validation step, confirming that the pipeline correctly handles a predictive model that learns from the input features and computes the complete set of evaluation metrics and cross-validation results.</p>
-<div id="cell-63" class="cell" data-execution_count="382">
+<div id="cell-63" class="cell" data-execution_count="64">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>logistic, result <span class="op">=</span> evaluate_model(</span>
@@ -2465,7 +2469,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>df_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="382">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 
 
@@ -2495,7 +2499,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.500000</td>
 <td>0.616163</td>
 <td>0.002325</td>
-<td>0.000590</td>
+<td>0.000632</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -2507,7 +2511,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.877622</td>
 <td>0.831643</td>
 <td>0.005237</td>
-<td>0.068516</td>
+<td>0.056080</td>
 </tr>
 </tbody>
 </table>
@@ -2521,7 +2525,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>Decision Trees are supervised learning models that make predictions by recursively splitting the data according to feature values. Each split creates a decision rule that separates observations into increasingly homogeneous groups, resulting in a tree-like structure of decisions.</p>
 <p>Unlike Logistic Regression, which models a linear relationship between features and the target probability, Decision Trees can naturally capture non-linear relationships and interactions between variables. This makes them a useful model to evaluate on structured tabular datasets such as the Titanic dataset.</p>
 <p>The model is trained and evaluated using the same pipeline introduced previously, ensuring that its performance can be compared directly with the previous classifiers.</p>
-<div id="cell-65" class="cell" data-execution_count="383">
+<div id="cell-65" class="cell" data-execution_count="65">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
@@ -2543,7 +2547,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>df_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="383">
+<div class="cell-output cell-output-display" data-execution_count="65">
 <div>
 
 
@@ -2573,7 +2577,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.500000</td>
 <td>0.616163</td>
 <td>0.002325</td>
-<td>0.000590</td>
+<td>0.000632</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -2585,7 +2589,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.877622</td>
 <td>0.831643</td>
 <td>0.005237</td>
-<td>0.068516</td>
+<td>0.056080</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
@@ -2597,7 +2601,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.999385</td>
 <td>0.806936</td>
 <td>0.019526</td>
-<td>0.007520</td>
+<td>0.005447</td>
 </tr>
 </tbody>
 </table>
@@ -2611,7 +2615,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>Random Forest is an ensemble learning algorithm that combines multiple Decision Trees to produce a more robust classifier. Instead of relying on a single tree, the algorithm trains many independent trees using different subsets of the data and features, and combines their predictions to improve generalization.</p>
 <p>Compared with a single Decision Tree, Random Forests are typically less sensitive to small variations in the training data and are better able to reduce overfitting. Because of this, they are widely used as strong baseline models for structured tabular datasets.</p>
 <p>The model is trained and evaluated using the same pipeline introduced previously, allowing a direct comparison with the other classifiers.</p>
-<div id="cell-67" class="cell" data-execution_count="384">
+<div id="cell-67" class="cell" data-execution_count="66">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
@@ -2633,7 +2637,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>df_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="384">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <div>
 
 
@@ -2663,7 +2667,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.500000</td>
 <td>0.616163</td>
 <td>0.002325</td>
-<td>0.000590</td>
+<td>0.000632</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -2675,7 +2679,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.877622</td>
 <td>0.831643</td>
 <td>0.005237</td>
-<td>0.068516</td>
+<td>0.056080</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
@@ -2687,7 +2691,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.999385</td>
 <td>0.806936</td>
 <td>0.019526</td>
-<td>0.007520</td>
+<td>0.005447</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
@@ -2699,7 +2703,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.997622</td>
 <td>0.824914</td>
 <td>0.004274</td>
-<td>0.103394</td>
+<td>0.081614</td>
 </tr>
 </tbody>
 </table>
@@ -2713,7 +2717,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>Gradient Boosting is an ensemble learning algorithm that builds a sequence of weak models, typically decision trees, where each new model attempts to correct the errors made by the previous ones.</p>
 <p>Unlike Random Forest, which trains multiple trees independently and combines their predictions, Gradient Boosting trains trees sequentially, gradually improving the model by focusing on observations that are harder to classify. This allows it to capture complex patterns in the data, although it may require more careful tuning to avoid overfitting.</p>
 <p>As with the previous classifiers, the model is evaluated using the same pipeline to ensure a consistent comparison across algorithms.</p>
-<div id="cell-69" class="cell" data-execution_count="385">
+<div id="cell-69" class="cell" data-execution_count="67">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingClassifier</span>
@@ -2735,7 +2739,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>df_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="385">
+<div class="cell-output cell-output-display" data-execution_count="67">
 <div>
 
 
@@ -2765,7 +2769,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.500000</td>
 <td>0.616163</td>
 <td>0.002325</td>
-<td>0.000590</td>
+<td>0.000632</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -2777,7 +2781,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.877622</td>
 <td>0.831643</td>
 <td>0.005237</td>
-<td>0.068516</td>
+<td>0.056080</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
@@ -2789,7 +2793,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.999385</td>
 <td>0.806936</td>
 <td>0.019526</td>
-<td>0.007520</td>
+<td>0.005447</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
@@ -2801,7 +2805,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.997622</td>
 <td>0.824914</td>
 <td>0.004274</td>
-<td>0.103394</td>
+<td>0.081614</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
@@ -2813,7 +2817,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.952476</td>
 <td>0.839502</td>
 <td>0.007706</td>
-<td>0.108487</td>
+<td>0.091357</td>
 </tr>
 </tbody>
 </table>
@@ -2830,7 +2834,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>The cross-validation results are particularly important because they provide a more reliable estimate of how each model is expected to perform on unseen data.</p>
 <section id="compare-model-performance" class="level3">
 <h3 class="anchored" data-anchor-id="compare-model-performance">Compare model performance</h3>
-<div id="cell-71" class="cell" data-execution_count="386">
+<div id="cell-71" class="cell" data-execution_count="68">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort models by cross-validation accuracy</span></span>
@@ -2839,7 +2843,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="386">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <div>
 
 
@@ -2869,7 +2873,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.952476</td>
 <td>0.839502</td>
 <td>0.007706</td>
-<td>0.108487</td>
+<td>0.091357</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -2881,7 +2885,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.877622</td>
 <td>0.831643</td>
 <td>0.005237</td>
-<td>0.068516</td>
+<td>0.056080</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">3</th>
@@ -2893,7 +2897,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.997622</td>
 <td>0.824914</td>
 <td>0.004274</td>
-<td>0.103394</td>
+<td>0.081614</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">2</th>
@@ -2905,7 +2909,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.999385</td>
 <td>0.806936</td>
 <td>0.019526</td>
-<td>0.007520</td>
+<td>0.005447</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
@@ -2917,7 +2921,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>0.500000</td>
 <td>0.616163</td>
 <td>0.002325</td>
-<td>0.000590</td>
+<td>0.000632</td>
 </tr>
 </tbody>
 </table>
@@ -2925,7 +2929,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 </div>
 </div>
-<div id="cell-72" class="cell" data-execution_count="387">
+<div id="cell-72" class="cell" data-execution_count="69">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -2962,7 +2966,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>The ROC curve plots the <strong>True Positive Rate (Recall)</strong> against the <strong>False Positive Rate</strong> as the classification threshold varies. Models whose curves lie closer to the upper-left corner generally exhibit better discrimination between the two classes.</p>
 <p>The <strong>Area Under the ROC Curve (ROC-AUC)</strong> summarizes this behavior into a single number between 0 and 1. A value of 0.5 corresponds to random guessing, whereas values closer to 1 indicate better class separation.</p>
 <p>The figure below compares the ROC curves of all evaluated classifiers.</p>
-<div id="cell-75" class="cell" data-execution_count="388">
+<div id="cell-75" class="cell" data-execution_count="70">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> RocCurveDisplay</span>
@@ -3018,7 +3022,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>While the ROC curve summarizes model performance across all possible decision thresholds, the confusion matrix evaluates the predictions obtained using the default classification threshold.</p>
 <p>Each confusion matrix displays the number of <strong>True Positives (TP)</strong>, <strong>True Negatives (TN)</strong>, <strong>False Positives (FP)</strong>, and <strong>False Negatives (FN)</strong>. Examining these values helps identify the types of errors made by each classifier and provides additional insight beyond aggregate performance metrics.</p>
 <p>The following figure compares the confusion matrices of the evaluated models.</p>
-<div id="cell-78" class="cell" data-execution_count="389">
+<div id="cell-78" class="cell" data-execution_count="71">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> ConfusionMatrixDisplay</span>
@@ -3071,7 +3075,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>Once selected, the final classifier is retrained using the complete training dataset and will be used to generate predictions for the Kaggle test set.</p>
 <section id="select-the-final-model" class="level3">
 <h3 class="anchored" data-anchor-id="select-the-final-model">Select the final model</h3>
-<div id="cell-81" class="cell" data-execution_count="390">
+<div id="cell-81" class="cell" data-execution_count="72">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select final model</span></span>
@@ -3081,7 +3085,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </section>
 <section id="retrain-the-final-model" class="level3">
 <h3 class="anchored" data-anchor-id="retrain-the-final-model">Retrain the final model</h3>
-<div id="cell-83" class="cell" data-execution_count="391">
+<div id="cell-83" class="cell" data-execution_count="73">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train final model using all available training data</span></span>
@@ -3090,8 +3094,8 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
 <span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="391">
-<style>#sk-container-id-31 {
+<div class="cell-output cell-output-display" data-execution_count="73">
+<style>#sk-container-id-6 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -3122,15 +3126,15 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   }
 }
 
-#sk-container-id-31 {
+#sk-container-id-6 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-31 pre {
+#sk-container-id-6 pre {
   padding: 0;
 }
 
-#sk-container-id-31 input.sk-hidden--visually {
+#sk-container-id-6 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -3142,7 +3146,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   width: 1px;
 }
 
-#sk-container-id-31 div.sk-dashed-wrapped {
+#sk-container-id-6 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -3150,7 +3154,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-31 div.sk-container {
+#sk-container-id-6 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -3160,7 +3164,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
   position: relative;
 }
 
-#sk-container-id-31 div.sk-text-repr-fallback {
+#sk-container-id-6 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -3176,14 +3180,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-31 div.sk-parallel-item::after {
+#sk-container-id-6 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-31 div.sk-parallel {
+#sk-container-id-6 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -3191,28 +3195,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-31 div.sk-parallel-item {
+#sk-container-id-6 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-31 div.sk-parallel-item:first-child::after {
+#sk-container-id-6 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-31 div.sk-parallel-item:last-child::after {
+#sk-container-id-6 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-31 div.sk-parallel-item:only-child::after {
+#sk-container-id-6 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-31 div.sk-serial {
+#sk-container-id-6 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3230,14 +3234,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-31 div.sk-toggleable {
+#sk-container-id-6 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-31 label.sk-toggleable__label {
+#sk-container-id-6 label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -3250,13 +3254,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-31 label.sk-toggleable__label .caption {
+#sk-container-id-6 label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-31 label.sk-toggleable__label-arrow:before {
+#sk-container-id-6 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -3264,25 +3268,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-31 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-6 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-31 div.sk-toggleable__content {
+#sk-container-id-6 div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-31 div.sk-toggleable__content.fitted {
+#sk-container-id-6 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-31 div.sk-toggleable__content pre {
+#sk-container-id-6 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -3290,79 +3294,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-31 div.sk-toggleable__content.fitted pre {
+#sk-container-id-6 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-31 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-6 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-31 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-6 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-31 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-31 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-6 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-31 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-31 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-6 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-31 div.sk-label label.sk-toggleable__label,
-#sk-container-id-31 div.sk-label label {
+#sk-container-id-6 div.sk-label label.sk-toggleable__label,
+#sk-container-id-6 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-31 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-6 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-31 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-6 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-31 div.sk-label label {
+#sk-container-id-6 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-31 div.sk-label-container {
+#sk-container-id-6 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-31 div.sk-estimator {
+#sk-container-id-6 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -3372,18 +3376,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-31 div.sk-estimator.fitted {
+#sk-container-id-6 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-31 div.sk-estimator:hover {
+#sk-container-id-6 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-31 div.sk-estimator.fitted:hover {
+#sk-container-id-6 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -3471,7 +3475,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-31 a.estimator_doc_link {
+#sk-container-id-6 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -3486,21 +3490,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-31 a.estimator_doc_link.fitted {
+#sk-container-id-6 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-31 a.estimator_doc_link:hover {
+#sk-container-id-6 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-31 a.estimator_doc_link.fitted:hover {
+#sk-container-id-6 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -3568,7 +3572,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-31" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GradientBoostingClassifier(random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-31" type="checkbox" checked=""><label for="sk-estimator-id-31" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GradientBoostingClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">?<span>Documentation for GradientBoostingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+</style><div id="sk-container-id-6" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GradientBoostingClassifier(random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" checked=""><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GradientBoostingClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">?<span>Documentation for GradientBoostingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -3730,7 +3734,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h3 class="anchored" data-anchor-id="feature-importance">Feature importance</h3>
 <p>Having selected and retrained the final model, we can now examine which features contributed most to its predictions.</p>
 <p>Gradient Boosting estimates the relative importance of each predictor based on how much it reduces classification error across the ensemble of decision trees. Although these importance values should not be interpreted as causal relationships, they provide useful insight into which variables the model considered most informative when distinguishing between survivors and non-survivors.</p>
-<div id="cell-85" class="cell" data-execution_count="392">
+<div id="cell-85" class="cell" data-execution_count="74">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>feature_importance <span class="op">=</span> (</span>
@@ -3764,7 +3768,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </section>
 <section id="generate-predictions" class="level3">
 <h3 class="anchored" data-anchor-id="generate-predictions">Generate predictions</h3>
-<div id="cell-88" class="cell" data-execution_count="393">
+<div id="cell-88" class="cell" data-execution_count="75">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict test set</span></span>
@@ -3773,7 +3777,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 <p>The final model is now trained using all available labeled data, maximizing the information available during training. Its predictions are generated on the unseen test set and will be used to create the Kaggle submission file.</p>
 <p>At this stage, the modeling workflow is complete: the remaining step is to format the predictions according to the competition requirements and generate the final submission.</p>
-<div id="cell-90" class="cell" data-execution_count="394">
+<div id="cell-90" class="cell" data-execution_count="76">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> gradient_boosting</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3787,7 +3791,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <p>The competition requires predictions to be provided in a specific format, containing the passenger identifier and the predicted survival outcome. The predictions generated by the final classifier are therefore combined with the corresponding <code>PassengerId</code> values and exported as a CSV file ready for submission.</p>
 <section id="create-the-submission-file" class="level3">
 <h3 class="anchored" data-anchor-id="create-the-submission-file">Create the submission file</h3>
-<div id="cell-92" class="cell" data-execution_count="395">
+<div id="cell-92" class="cell" data-execution_count="77">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>test_ids <span class="op">=</span> (</span>
@@ -3804,7 +3808,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>submission.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="395">
+<div class="cell-output cell-output-display" data-execution_count="77">
 <div>
 
 
@@ -3851,7 +3855,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </section>
 <section id="save-the-submission" class="level3">
 <h3 class="anchored" data-anchor-id="save-the-submission">Save the submission</h3>
-<div id="cell-94" class="cell" data-execution_count="396">
+<div id="cell-94" class="cell" data-execution_count="78">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>submission.to_csv(</span>

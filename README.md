@@ -1,12 +1,15 @@
 # Titanic: End-to-End Classification Case Study
 
+> **Language:** 🇺🇸 English | 🇧🇷 [Português](https://github.com/ianlopezdiaz/kaggle-titanic-pt)
+
 This repository presents a complete end-to-end machine learning workflow using the **Kaggle Titanic: Machine Learning from Disaster** dataset.
 
-The project is designed as both a portfolio piece and an educational resource, demonstrating the typical stages of a supervised classification project—from exploratory data analysis to feature engineering, model development, evaluation, and Kaggle submission generation.
+The project is designed as both a portfolio piece and an educational resource, demonstrating the typical stages of a supervised classification project - from exploratory data analysis to feature engineering, model development, evaluation, and Kaggle submission generation.
 
 The accompanying Quarto website documents every step of the workflow and is available at:
 
 **[https://ianlopezdiaz.github.io/kaggle-titanic](https://ianlopezdiaz.github.io/kaggle-titanic)**
+
 
 ---
 
@@ -33,8 +36,8 @@ The complete pipeline includes:
 
 The project uses the **Titanic: Machine Learning from Disaster** competition dataset from Kaggle.
 
-* Competition overview: https://www.kaggle.com/competitions/titanic
-* Dataset: https://www.kaggle.com/competitions/titanic/data
+* Competition overview: [https://www.kaggle.com/competitions/titanic](https://www.kaggle.com/competitions/titanic)
+* Dataset: [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
 
 ---
 
