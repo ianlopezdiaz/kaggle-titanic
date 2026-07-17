@@ -80,13 +80,7 @@ kaggle-titanic/
 
 ### Install the dependencies
 
-Using `pip`:
-
-```bash
-pip install -r requirements.txt
-```
-
-or create the Conda environment:
+Create the Conda environment:
 
 ```bash
 conda env create -f environment.yml
